@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symposium 2026 | Payment</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body class="subpage">
+    <nav class="navbar scrolled">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <i data-lucide="rocket" class="logo-icon"></i>
+                <span>SYMPOSIUM 2026</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="payment-page container py-lg pt-nav">
+        <div id="payment-content" class="payment-container glass-card"
+            style="max-width: 900px; margin: 0 auto; padding: 3rem;">
+            <div class="payment-header" style="text-align: center; margin-bottom: 3rem;">
+                <h2>Complete Your Payment</h2>
+                <p>Registration Fee: <strong>₹200</strong></p>
+            </div>
+
+            <div class="payment-layout" style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;">
+                <div class="qr-section"
+                    style="text-align: center; background: white; padding: 2rem; border-radius: 1rem; color: black;">
+                    <i data-lucide="qr-code" style="width: 120px; height: 120px; margin-bottom: 1rem;"></i>
+                    <p>Scan to Pay via UPI</p>
+                    <p style="margin-top: 1rem; font-weight: 700;">symposium2026@axisbank</p>
+                </div>
+
+                <form id="payment-form" style="display: flex; flex-direction: column; gap: 1.5rem;">
+                    <div class="form-group">
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Transaction ID /
+                            UTR</label>
+                        <input type="text" id="transactionId" required placeholder="12-digit UPI ID"
+                            style="width: 100%; padding: 0.8rem; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 0.5rem; color: white;">
+                    </div>
+                    <div class="form-group">
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Upload Screenshot
+                            (Optional for Demo)</label>
+                        <input type="file" id="screenshot" style="width: 100%; color: var(--text-muted);">
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">Submit
+                        Details</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="success-screen" class="glass-card text-center"
+            style="display: none; max-width: 500px; margin: 0 auto; padding: 4rem;">
+            <i data-lucide="check-circle" style="width: 80px; height: 80px; color: #4ade80; margin-bottom: 2rem;"></i>
+            <h2>Registration Successful!</h2>
+            <p style="margin: 1.5rem 0;">Your Registration ID: <strong id="display-regId"></strong></p>
+            <p style="color: var(--text-muted); margin-bottom: 2rem;">We will verify your payment and send a
+                confirmation email shortly.</p>
+            <a href="index.html" class="btn btn-primary">Return Home</a>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script type="module" src="js/payment.js"></script>
+    <script>lucide.createIcons();</script>
+</body>
+
+</html>

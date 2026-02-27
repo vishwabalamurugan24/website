@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symposium 2026 | Events</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body class="subpage">
+    <nav class="navbar scrolled">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <i data-lucide="rocket" class="logo-icon"></i>
+                <span>SYMPOSIUM 2026</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="events.html" class="active">Events</a></li>
+                <li><a href="register.html">Register</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="admin.html" class="admin-btn">Admin</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container py-lg pt-nav">
+        <div class="section-header text-center">
+            <h1>SYMPOSIUM <span class="gradient-text">EVENTS</span></h1>
+            <p class="subtitle">Discover our wide range of technical and non-technical competitions.</p>
+        </div>
+
+        <div class="events-grid" id="events-grid">
+            <!-- Events will be injected via JS or listed here -->
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script>
+        lucide.createIcons();
+        const events = [
+            { title: 'Code Conquest', cat: 'Technical', desc: 'Solve complex algorithmic challenges.', icon: 'code' },
+            { title: 'Paper Presentation', cat: 'Technical', desc: 'Present innovative research papers.', icon: 'monitor' },
+            { title: 'Robo Soccer', cat: 'Technical', desc: 'Build robots to compete in soccer.', icon: 'cpu' },
+            { title: 'Gaming Central', cat: 'Non-Technical', desc: 'Compete in popular esports titles.', icon: 'zap' },
+            { title: 'Photography', cat: 'Non-Technical', desc: 'Capture the essence of symposium.', icon: 'camera' },
+            { title: 'Treasure Hunt', cat: 'Non-Technical', desc: 'Thrilling hunt across campus.', icon: 'music' }
+        ];
+
+        const grid = document.getElementById('events-grid');
+        events.forEach(e => {
+            grid.innerHTML += `
+        <div class="event-card glass-card">
+          <div class="event-icon"><i data-lucide="${e.icon}"></i></div>
+          <h3>${e.title}</h3>
+          <span class="category-tag">${e.cat}</span>
+          <p>${e.desc}</p>
+          <a href="register.html" class="btn btn-outline full-width">Register Now</a>
+        </div>
+      `;
+        });
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

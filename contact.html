@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symposium 2026 | Contact</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body class="subpage">
+    <nav class="navbar scrolled">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <i data-lucide="rocket" class="logo-icon"></i>
+                <span>SYMPOSIUM 2026</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="register.html">Register</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+                <li><a href="admin.html" class="admin-btn">Admin</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container py-lg pt-nav">
+        <div class="section-header text-center">
+            <h1>GET IN <span class="gradient-text">TOUCH</span></h1>
+            <p class="subtitle">Have queries? Our coordinators are here to help.</p>
+        </div>
+
+        <div class="contact-layout"
+            style="display: grid; grid-template-columns: 1fr 1.5fr; gap: 3rem; margin-top: 3rem;">
+            <div class="contact-info">
+                <div class="glass-card"
+                    style="padding: 2rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem;">
+                    <i data-lucide="phone" style="color: var(--primary);"></i>
+                    <span>+91 98765 43210</span>
+                </div>
+                <div class="glass-card"
+                    style="padding: 2rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem;">
+                    <i data-lucide="mail" style="color: var(--primary);"></i>
+                    <span>support@symposium.com</span>
+                </div>
+            </div>
+
+            <form id="contact-form" class="glass-card"
+                style="padding: 3rem; display: flex; flex-direction: column; gap: 1.5rem;">
+                <input type="text" placeholder="Your Name" required
+                    style="background: var(--glass); border: 1px solid var(--glass-border); padding: 1rem; color: white;">
+                <input type="email" placeholder="Your Email" required
+                    style="background: var(--glass); border: 1px solid var(--glass-border); padding: 1rem; color: white;">
+                <textarea placeholder="Your Message" rows="5" required
+                    style="background: var(--glass); border: 1px solid var(--glass-border); padding: 1rem; color: white;"></textarea>
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script type="module" src="js/contact.js"></script>
+    <script>lucide.createIcons();</script>
+</body>
+
+</html>

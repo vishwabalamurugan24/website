@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Symposium 2026 | Home</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        <i data-lucide="rocket" class="logo-icon"></i>
+        <span>SYMPOSIUM 2026</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="register.html">Register</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="admin.html" class="admin-btn">Admin</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-content">
+        <h1>SYMPOSIUM <span class="gradient-text">2026</span></h1>
+        <p class="hero-subtitle">Unleashing Innovation. Transforming Future.</p>
+        
+        <div class="countdown-container glass-card" id="countdown">
+          <div class="countdown-item">
+            <span class="count" id="days">00</span>
+            <span class="label">Days</span>
+          </div>
+          <div class="countdown-item">
+            <span class="count" id="hours">00</span>
+            <span class="label">Hours</span>
+          </div>
+          <div class="countdown-item">
+            <span class="count" id="minutes">00</span>
+            <span class="label">Mins</span>
+          </div>
+          <div class="countdown-item">
+            <span class="count" id="seconds">00</span>
+            <span class="label">Secs</span>
+          </div>
+        </div>
+
+        <div class="hero-actions">
+          <a href="register.html" class="btn btn-primary">Register Now <i data-lucide="arrow-right"></i></a>
+          <a href="events.html" class="btn btn-outline">Explore Events</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <!-- Consolidated footer styles in style.css -->
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    lucide.createIcons();
+    
+    // Countdown Timer
+    const targetDate = new Date('2026-03-20T09:00:00').getTime();
+    setInterval(() => {
+      const now = new Date().getTime();
+      const diff = targetDate - now;
+      document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+      document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      document.getElementById('minutes').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      document.getElementById('seconds').innerText = Math.floor((diff % (1000 * 60)) / 1000);
+    }, 1000);
+  </script>
+</body>
+</html>

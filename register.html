@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symposium 2026 | Register</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body class="subpage">
+    <nav class="navbar scrolled">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <i data-lucide="rocket" class="logo-icon"></i>
+                <span>SYMPOSIUM 2026</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="register.html" class="active">Register</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="admin.html" class="admin-btn">Admin</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="register-page container py-lg pt-nav">
+        <div class="register-container glass-card" style="max-width: 800px; margin: 0 auto; padding: 3rem;">
+            <div class="register-header" style="text-align: center; margin-bottom: 3rem;">
+                <h2>Registration Form</h2>
+                <p style="color: var(--text-muted);">Fill in your details to secure your spot at Symposium 2026.</p>
+            </div>
+            <form id="register-form" class="register-form" style="display: flex; flex-direction: column; gap: 2rem;">
+                <div class="form-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                    <div class="form-group">
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Full Name</label>
+                        <input type="text" id="name" required placeholder="John Doe"
+                            style="width: 100%; padding: 0.8rem; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 0.5rem; color: white;">
+                    </div>
+                    <div class="form-group">
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Email Address</label>
+                        <input type="email" id="email" required placeholder="john@example.com"
+                            style="width: 100%; padding: 0.8rem; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 0.5rem; color: white;">
+                    </div>
+                    <div class="form-group">
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">College Name</label>
+                        <input type="text" id="college" required placeholder="University Name"
+                            style="width: 100%; padding: 0.8rem; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 0.5rem; color: white;">
+                    </div>
+                    <div class="form-group">
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Department</label>
+                        <input type="text" id="dept" required placeholder="e.g. CSE"
+                            style="width: 100%; padding: 0.8rem; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 0.5rem; color: white;">
+                    </div>
+                    <div class="form-group">
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Year of Study</label>
+                        <select id="year"
+                            style="width: 100%; padding: 0.8rem; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 0.5rem; color: white;">
+                            <option value="1">1st Year</option>
+                            <option value="2">2nd Year</option>
+                            <option value="3">3rd Year</option>
+                            <option value="4">4th Year</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Select Event</label>
+                        <select id="event"
+                            style="width: 100%; padding: 0.8rem; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 0.5rem; color: white;">
+                            <option>Code Conquest</option>
+                            <option>Paper Presentation</option>
+                            <option>Robo Soccer</option>
+                            <option>Gaming Central</option>
+                            <option>Photography</option>
+                            <option>Treasure Hunt</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary submit-btn"
+                    style="width: 100%; justify-content: center; padding: 1.25rem; font-size: 1.1rem;">
+                    Proceed to Payment <i data-lucide="arrow-right"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script type="module" src="js/register.js"></script>
+    <script>lucide.createIcons();</script>
+</body>
+
+</html>
