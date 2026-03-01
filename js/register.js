@@ -1,17 +1,3 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT_ID.appspot.com",
-    messagingSenderId: "YOUR_SENDER_ID",
-    appId: "YOUR_APP_ID"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
 
 const regForm = document.getElementById('register-form');
 if (regForm) {
@@ -31,16 +17,23 @@ if (regForm) {
         };
 
         try {
-            const docRef = await addDoc(collection(db, "registrations"), data);
-            localStorage.setItem('pendingRegDocId', docRef.id);
-            localStorage.setItem('recentRegistration', JSON.stringify(data));
-            window.location.href = 'payment.html';
+            const response = await fetch('http://localhost:3000/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+            if (response.ok) {
+                localStorage.setItem('pendingRegDocId', data.regId);
+                localStorage.setItem('recentRegistration', JSON.stringify(data));
+                window.location.href = 'payment.html';
+            } else {
+                alert("Failed to register. Please try again.");
+            }
         } catch (err) {
             console.error(err);
-            alert("Firebase error. Check Console.");
-            // Fallback for demo
-            localStorage.setItem('recentRegistration', JSON.stringify(data));
-            window.location.href = 'payment.html';
+            alert("An error occurred. Please try again.");
         }
     });
 }

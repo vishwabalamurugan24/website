@@ -1,5 +1,6 @@
-import { db } from '../firebase';
-import { collection, addDoc } from 'firebase/firestore';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { User, Mail, School, BookOpen, Layers, CheckCircle, Send } from 'lucide-react';
 
 const Register = () => {
     const navigate = useNavigate();
@@ -21,21 +22,23 @@ const Register = () => {
         const regId = 'SYM' + Math.random().toString(36).substr(2, 6).toUpperCase();
 
         try {
-            const docRef = await addDoc(collection(db, "registrations"), {
-                ...formData,
-                regId,
-                status: 'Pending Payment',
-                createdAt: new Date()
+            const response = await fetch('http://localhost:3000/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ ...formData, regId }),
             });
-            localStorage.setItem('pendingRegDocId', docRef.id);
-            localStorage.setItem('recentRegistration', JSON.stringify({ ...formData, regId }));
-            navigate('/payment');
+
+            if (response.ok) {
+                localStorage.setItem('recentRegistration', JSON.stringify({ ...formData, regId }));
+                navigate('/payment');
+            } else {
+                alert('Registration failed. Please try again.');
+            }
         } catch (error) {
             console.error("Error creating registration: ", error);
-            alert("Firebase not configured. Check src/firebase.js");
-            // Demo fallback
-            localStorage.setItem('recentRegistration', JSON.stringify({ ...formData, regId }));
-            navigate('/payment');
+            alert("An error occurred. Please try again later.");
         }
     };
 
@@ -57,6 +60,7 @@ const Register = () => {
                                 required
                                 placeholder="John Doe"
                                 onChange={handleChange}
+                                value={formData.name}
                             />
                         </div>
                         <div className="form-group">
@@ -67,6 +71,7 @@ const Register = () => {
                                 required
                                 placeholder="john@example.com"
                                 onChange={handleChange}
+                                value={formData.email}
                             />
                         </div>
                         <div className="form-group">
@@ -77,6 +82,7 @@ const Register = () => {
                                 required
                                 placeholder="Tech University"
                                 onChange={handleChange}
+                                value={formData.college}
                             />
                         </div>
                         <div className="form-group">
@@ -87,11 +93,12 @@ const Register = () => {
                                 required
                                 placeholder="Computer Science"
                                 onChange={handleChange}
+                                value={formData.department}
                             />
                         </div>
                         <div className="form-group">
                             <label><Layers size={16} /> Year of Study</label>
-                            <select name="year" onChange={handleChange}>
+                            <select name="year" onChange={handleChange} value={formData.year}>
                                 <option value="1">1st Year</option>
                                 <option value="2">2nd Year</option>
                                 <option value="3">3rd Year</option>
@@ -100,7 +107,7 @@ const Register = () => {
                         </div>
                         <div className="form-group">
                             <label><CheckCircle size={16} /> Select Event</label>
-                            <select name="event" onChange={handleChange}>
+                            <select name="event" onChange={handleChange} value={formData.event}>
                                 <option value="Code Conquest">Code Conquest</option>
                                 <option value="Paper Presentation">Paper Presentation</option>
                                 <option value="Robo Soccer">Robo Soccer</option>
