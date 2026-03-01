@@ -22,7 +22,7 @@ const Register = () => {
         const regId = 'SYM' + Math.random().toString(36).substr(2, 6).toUpperCase();
 
         try {
-            const response = await fetch('http://localhost:3000/register', {
+            const response = await fetch('/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
