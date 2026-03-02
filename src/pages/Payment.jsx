@@ -1,52 +1,48 @@
-import { db, storage } from '../firebase';
-import { doc, updateDoc } from 'firebase/firestore';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { ArrowLeft, CheckCircle, Info, QrCode, Upload } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const Payment = () => {
     const navigate = useNavigate();
     const [regData, setRegData] = useState(null);
     const [transactionId, setTransactionId] = useState('');
-    const [file, setFile] = useState(null);
     const [isSuccess, setIsSuccess] = useState(false);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const data = localStorage.getItem('recentRegistration');
-        if (data) setRegData(JSON.parse(data));
-        else navigate('/register');
-    }, []);
-
-    const handleFileChange = (e) => {
-        setFile(e.target.files[0]);
-    };
+        if (data) {
+            setRegData(JSON.parse(data));
+        } else {
+            navigate('/register');
+        }
+    }, [navigate]);
 
     const handlePaymentSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
-        const docId = localStorage.getItem('pendingRegDocId');
 
         try {
-            let screenshotUrl = "";
-            if (file && docId) {
-                const storageRef = ref(storage, `screenshots/${docId}`);
-                await uploadBytes(storageRef, file);
-                screenshotUrl = await getDownloadURL(storageRef);
-            }
+            const response = await fetch('http://localhost:3000/update-payment', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ 
+                    regId: regData?.regId,
+                    paymentId: transactionId 
+                }),
+            });
 
-            if (docId) {
-                const regRef = doc(db, "registrations", docId);
-                await updateDoc(regRef, {
-                    transactionId,
-                    screenshotUrl,
-                    status: 'Pending Verification',
-                    updatedAt: new Date()
-                });
+            if (response.ok) {
+                setIsSuccess(true);
+            } else {
+                alert('Payment update failed. Please try again.');
             }
-            setIsSuccess(true);
         } catch (error) {
             console.error("Error updating payment: ", error);
-            alert("Firebase error. Using fallback.");
-            setIsSuccess(true);
+            alert("An error occurred. Please try again later.");
         } finally {
             setLoading(false);
         }
@@ -110,25 +106,8 @@ const Payment = () => {
                             />
                         </div>
 
-                        <div className="form-group">
-                            <label>Upload Payment Screenshot</label>
-                            <div className="file-upload">
-                                <input
-                                    type="file"
-                                    id="screenshot"
-                                    accept="image/*"
-                                    required
-                                    onChange={handleFileChange}
-                                />
-                                <label htmlFor="screenshot" className="file-label">
-                                    <Upload size={20} />
-                                    <span>{file ? file.name : 'Choose Image'}</span>
-                                </label>
-                            </div>
-                        </div>
-
-                        <button type="submit" className="btn btn-primary submit-btn">
-                            Submit Payment Details
+                        <button type="submit" className="btn btn-primary submit-btn" disabled={loading}>
+                            {loading ? 'Submitting...' : 'Submit Payment Details'}
                         </button>
                     </form>
                 </div>
