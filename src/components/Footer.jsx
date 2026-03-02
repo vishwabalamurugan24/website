@@ -1,43 +1,41 @@
 import React from 'react';
-import { Mail, Phone, Globe, Github, Twitter, Instagram } from 'lucide-react';
-import './Footer.css';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
     return (
-        <footer className="footer">
-            <div className="container footer-grid">
-                <div className="footer-brand">
-                    <h3>SYMPOSIUM 2026</h3>
-                    <p>The biggest technical extravaganza of the year. Innovate. Compete. Conquer.</p>
-                    <div className="social-links">
-                        <a href="#"><Twitter size={20} /></a>
-                        <a href="#"><Instagram size={20} /></a>
-                        <a href="#"><Github size={20} /></a>
+        <footer className="mt-auto border-t border-white/5 bg-[#181818] py-12 px-6">
+            <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+
+                <div className="flex flex-col gap-2">
+                    <div className="flex items-center gap-2">
+                        <span className="material-symbols-outlined text-primary">rocket_launch</span>
+                        <span className="text-xl font-bold text-white tracking-tight">TECHVISTA <span className="text-accent">2026</span></span>
                     </div>
+                    <p className="text-slate-500 text-sm">Empowering the next generation of innovators.</p>
                 </div>
 
-                <div className="footer-links">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="/about">About Us</a></li>
-                        <li><a href="/events">Events</a></li>
-                        <li><a href="/register">Register</a></li>
-                        <li><a href="/admin">Admin Login</a></li>
-                    </ul>
+                <div className="flex gap-8 text-slate-500 text-sm">
+                    <Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+                    <Link to="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
+                    <Link to="/contact" className="hover:text-white transition-colors">Contact Support</Link>
                 </div>
 
-                <div className="footer-contact">
-                    <h4>Contact Us</h4>
-                    <ul>
-                        <li><Phone size={18} /> +91 98765 43210</li>
-                        <li><Mail size={18} /> contact@symposium2026.com</li>
-                        <li><Globe size={18} /> college.edu/symposium</li>
-                    </ul>
+                <div className="flex gap-6">
+                    <a className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary hover:text-[#121212] transition-all text-white/70" href="#">
+                        <span className="material-symbols-outlined text-lg">share</span>
+                    </a>
+                    <a className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary hover:text-[#121212] transition-all text-white/70" href="#">
+                        <span className="material-symbols-outlined text-lg">public</span>
+                    </a>
+                    <a className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary hover:text-[#121212] transition-all text-white/70" href="#">
+                        <span className="material-symbols-outlined text-lg">alternate_email</span>
+                    </a>
                 </div>
             </div>
-            <div className="footer-bottom">
-                <p>&copy; 2026 Symposium Event Committee. All Rights Reserved.</p>
-            </div>
+
+            <p className="text-center text-slate-500 text-xs tracking-widest uppercase mt-12 pt-8 border-t border-white/5">
+                © 2026 TechVista Global Summit. All rights reserved. Designed for the future.
+            </p>
         </footer>
     );
 };

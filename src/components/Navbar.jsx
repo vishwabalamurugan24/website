@@ -1,80 +1,50 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Rocket } from 'lucide-react';
-import './Navbar.css';
 
 const Navbar = () => {
-    const [isOpen, setIsOpen] = useState(false);
-    const [scrolled, setScrolled] = useState(false);
     const location = useLocation();
 
-    useEffect(() => {
-        const handleScroll = () => {
-            setScrolled(window.scrollY > 50);
-        };
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
-
-    const navLinks = [
-        { name: 'Home', path: '/' },
-        { name: 'About', path: '/about' },
-        { name: 'Events', path: '/events' },
-        { name: 'Register', path: '/register' },
-        { name: 'Contact', path: '/contact' },
-    ];
+    const getLinkClass = (path) => {
+        return location.pathname === path
+            ? "text-primary text-sm font-bold border-b-2 border-primary pb-1"
+            : "text-white/70 hover:text-primary text-sm font-medium transition-colors";
+    };
 
     return (
-        <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
-            <div className="container nav-container">
-                <Link to="/" className="logo spider-title">
-                    <Rocket className="logo-icon" />
-                    <span>SYMPOSIUM 2026</span>
+        <header className="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-white/10 bg-[#121212]/80 backdrop-blur-md px-6 md:px-16 py-4">
+            <div className="flex items-center gap-8">
+                <Link to="/" className="flex items-center gap-3 text-primary">
+                    <span className="material-symbols-outlined text-3xl font-bold">terminal</span>
+                    <h2 className="text-white text-xl font-bold leading-tight tracking-tight">
+                        TechVista <span className="text-accent">2026</span>
+                    </h2>
                 </Link>
 
-                {/* Desktop Nav */}
-                <ul className="nav-links">
-                    {navLinks.map((link) => (
-                        <li key={link.path}>
-                            <Link
-                                to={link.path}
-                                className={location.pathname === link.path ? 'active' : ''}
-                            >
-                                {link.name}
-                            </Link>
-                        </li>
-                    ))}
-                    <li>
-                        <Link to="/admin" className="admin-btn">Admin</Link>
-                    </li>
-                </ul>
-
-                {/* Mobile Menu Toggle */}
-                <button className="mobile-toggle" onClick={() => setIsOpen(!isOpen)}>
-                    {isOpen ? <X /> : <Menu />}
-                </button>
-
-                {/* Mobile Nav */}
-                <div className={`mobile-nav ${isOpen ? 'open' : ''}`}>
-                    <ul className="mobile-nav-links">
-                        {navLinks.map((link) => (
-                            <li key={link.path}>
-                                <Link
-                                    to={link.path}
-                                    onClick={() => setIsOpen(false)}
-                                    className={location.pathname === link.path ? 'active' : ''}
-                                >
-                                    {link.name}
-                                </Link>
-                            </li>
-                        ))}
-                        <li>
-                            <Link to="/admin" onClick={() => setIsOpen(false)} className="admin-btn">Admin Panel</Link>
-                        </li>
-                    </ul>
-                </div>
+                <nav className="hidden md:flex items-center gap-8">
+                    <Link to="/" className={getLinkClass('/')}>Home</Link>
+                    <Link to="/events" className={getLinkClass('/events')}>Events</Link>
+                    <Link to="/schedule" className={getLinkClass('/schedule')}>Schedule</Link>
+                    <Link to="/contact" className={getLinkClass('/contact')}>Contact</Link>
+                </nav>
             </div>
-        </nav>
+
+            <div className="flex items-center gap-4">
+                <div className="hidden sm:flex items-center bg-card-dark border border-white/10 rounded-lg px-3 py-1.5 focus-within:border-primary/50 focus-within:ring-1 focus-within:ring-primary/50 transition-all">
+                    <span className="material-symbols-outlined text-white/50 text-xl">search</span>
+                    <input
+                        className="bg-transparent border-none focus:ring-0 text-sm text-white placeholder:text-white/30 w-40 outline-none"
+                        placeholder="Search events..."
+                        type="text"
+                    />
+                </div>
+
+                <Link to="/register">
+                    <button className="bg-primary hover:bg-primary/90 text-black px-6 py-2 rounded-lg text-sm font-bold transition-all transform hover:scale-105 shadow-[0_0_15px_rgba(29,185,84,0.3)]">
+                        Register
+                    </button>
+                </Link>
+            </div>
+        </header>
     );
 };
 

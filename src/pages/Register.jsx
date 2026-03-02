@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, Link, useSearchParams } from 'react-router-dom';
-import { db, collection, addDoc } from '../js/firebase-config'; // Ensure path is correct
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { db, collection, addDoc } from '../../js/firebase-config';
 import './Register.css';
 
 const Register = () => {
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
     const [formData, setFormData] = useState({
-        name: '',
+        firstName: '',
+        lastName: '',
         email: '',
-        college: '',
-        department: '',
-        year: '1',
-        event: 'Code Conquest' // Default
+        role: 'Developer / Engineer',
+        event: 'Keynote: Future of AI'
     });
 
     useEffect(() => {
@@ -30,243 +29,217 @@ const Register = () => {
         e.preventDefault();
         const fullData = {
             ...formData,
+            name: `${formData.firstName} ${formData.lastName}`,
             timestamp: new Date().toISOString(),
             status: 'Pending Verification'
         };
 
         try {
             await addDoc(collection(db, "registrations"), fullData);
-            alert("Protocol Initialized! Awaiting Stark HQ Verification.");
             navigate('/payment');
         } catch (error) {
             console.error("Transmission Error: ", error);
-            alert("Security Breach: Failed to transmit data. Please check your web-link.");
+            alert("Database Error: Failed to transmit data. Please check your connection.");
         }
     };
 
     return (
-        <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden font-display dark bg-background-light dark:bg-[#211112]">
-            <main className="flex-1 flex flex-col items-center justify-start py-12 px-4 md:px-0 z-10 w-full relative pt-24 text-slate-900 dark:text-slate-100">
-                {/* Hero Banner Section */}
-                <div className="w-full max-w-4xl px-4 mb-8">
-                    <div className="relative w-full h-48 md:h-64 rounded-xl overflow-hidden border border-primary/30 group">
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#211112] via-transparent to-transparent z-10"></div>
-                        <div className="absolute inset-0 scanline opacity-30 z-20"></div>
-                        <img
-                            className="w-full h-full object-cover scale-105 group-hover:scale-100 transition-transform duration-700"
-                            src="https://images.unsplash.com/photo-1635805737707-575885ab0820?auto=format&fit=crop&q=80&w=800&h=400"
-                            alt="Background"
-                        />
-                        <div className="absolute bottom-6 left-8 z-30">
-                            <span className="inline-block bg-[#e63746] text-white text-[10px] font-bold px-2 py-0.5 rounded mb-2 tracking-[0.3em]">
-                                ENROLLMENT OPEN
-                            </span>
-                            <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tighter uppercase spider-title">
-                                Agent Enrollment
-                            </h2>
-                            <p className="text-[#e63746]/80 text-xs font-medium tracking-widest mt-1 uppercase">
-                                Clearance Level: Omega Required
-                            </p>
+        <main className="flex-1 max-w-4xl mx-auto px-6 py-12 w-full">
+            {/* Progress Bar Section */}
+            <div className="mb-12">
+                <div className="flex justify-between mb-4">
+                    <div className="flex flex-col items-center gap-2 group">
+                        <div className="w-10 h-10 rounded-full flex items-center justify-center step-active text-white transition-all">
+                            <span className="material-symbols-outlined">person</span>
                         </div>
+                        <span className="text-xs font-bold text-accent">DETAILS</span>
+                    </div>
+
+                    <div className="flex-1 h-[2px] bg-white/10 mt-5 mx-4 relative overflow-hidden">
+                        <div className="absolute top-0 left-0 h-full w-1/3 bg-accent shadow-[0_0_15px_rgba(247,37,133,0.4)]"></div>
+                    </div>
+
+                    <div className="flex flex-col items-center gap-2">
+                        <div className="w-10 h-10 rounded-full flex items-center justify-center bg-[#181818] border border-white/20 text-white/40">
+                            <span className="material-symbols-outlined">event_available</span>
+                        </div>
+                        <span className="text-xs font-bold text-white/40">EVENTS</span>
+                    </div>
+
+                    <div className="flex-1 h-[2px] bg-white/10 mt-5 mx-4"></div>
+
+                    <div className="flex flex-col items-center gap-2">
+                        <div className="w-10 h-10 rounded-full flex items-center justify-center bg-[#181818] border border-white/20 text-white/40">
+                            <span className="material-symbols-outlined">payments</span>
+                        </div>
+                        <span className="text-xs font-bold text-white/40">PAYMENT</span>
                     </div>
                 </div>
 
-                {/* Registration Container */}
-                <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-3 gap-12 px-4">
-                    {/* Briefing Sidebar */}
-                    <div className="lg:col-span-1 space-y-8">
-                        <div className="glass-card p-6 border-[#e63746]/20 bg-[#e63746]/5 rounded-xl space-y-6">
-                            <h3 className="text-xl font-bold tracking-tight text-white spider-title flex items-center gap-2">
-                                <span className="material-symbols-outlined text-[#e63746]">description</span> MISSION BRIEFING
-                            </h3>
-                            <div className="space-y-4">
-                                <div className="space-y-1">
-                                    <p className="text-[10px] text-[#e63746]/60 font-bold uppercase tracking-widest">Selected Specialization</p>
-                                    <p className="text-sm font-bold text-white" id="displayEvent">{formData.event}</p>
-                                </div>
-                                <div className="h-px bg-[#e63746]/10"></div>
-                                <div className="space-y-1">
-                                    <p className="text-[10px] text-[#e63746]/60 font-bold uppercase tracking-widest">Deployment Logistics</p>
-                                    <div className="flex items-center gap-2 text-xs text-slate-300">
-                                        <span className="material-symbols-outlined text-sm">calendar_today</span>
-                                        <span>March 15, 2026</span>
-                                    </div>
-                                    <div className="flex items-center gap-2 text-xs text-slate-300">
-                                        <span className="material-symbols-outlined text-sm">schedule</span>
-                                        <span>09:00 AM - 06:00 PM</span>
-                                    </div>
-                                    <div className="flex items-center gap-2 text-xs text-slate-300">
-                                        <span className="material-symbols-outlined text-sm">location_on</span>
-                                        <span>Stark Tower, Queens, NYC</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                <div className="flex justify-between items-center bg-[#181818]/50 p-4 rounded-xl border border-white/5">
+                    <p className="text-white/80 font-medium">Step 1 of 3: <span className="text-primary">Participant Details</span></p>
+                    <span className="text-accent font-bold">33% Complete</span>
+                </div>
+            </div>
 
-                        <div className="glass-card p-6 border-white/5 bg-white/5 rounded-xl">
-                            <h4 className="text-xs font-bold text-slate-400 uppercase tracking-[0.2em] mb-4">Security Clearance</h4>
-                            <ul className="space-y-3">
-                                <li className="flex items-start gap-2 text-[11px] text-slate-500">
-                                    <span className="material-symbols-outlined text-[#e63746] text-sm">check_circle</span>
-                                    Stark-Tech Credentials Validated
-                                </li>
-                                <li className="flex items-start gap-2 text-[11px] text-slate-500">
-                                    <span className="material-symbols-outlined text-[#e63746] text-sm">check_circle</span>
-                                    Biometric Handshake Initialized
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                {/* Left Side: Registration Form */}
+                <div className="lg:col-span-2 space-y-8">
+                    <div className="glass-morphism rounded-2xl p-8 shadow-2xl relative overflow-hidden border border-white/5">
+                        {/* Accent Glow */}
+                        <div className="absolute -top-24 -right-24 w-48 h-48 bg-primary/10 blur-[100px]"></div>
+                        <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-accent/10 blur-[100px]"></div>
 
-                    {/* Form Section */}
-                    <div className="lg:col-span-2 space-y-8">
-                        {/* Protocol Header */}
-                        <div className="text-center space-y-2">
-                            <h3 className="text-2xl font-bold tracking-tight text-slate-100 spider-title">SECURE ACCESS PROTOCOL</h3>
-                            <div className="h-1 w-24 bg-[#e63746] mx-auto rounded-full"></div>
-                            <p className="text-slate-400 text-sm max-w-md mx-auto py-2">
-                                Initialize your biometric signature and credentials for the upcoming symposium.
-                                All data is encrypted via Stark-Tech 256-bit protocols.
-                            </p>
-                        </div>
+                        <h2 className="text-3xl font-black mb-2 text-white uppercase tracking-tight">Register Now</h2>
+                        <p className="text-slate-400 mb-8">Tell us about yourself to start your journey into the future.</p>
 
-                        {/* Form Start */}
-                        <form className="space-y-10" id="registrationForm" onSubmit={handleSubmit}>
-                            {/* Section 1: Identity */}
-                            <div className="space-y-6">
-                                <div className="flex items-center gap-4">
-                                    <span className="text-[#e63746] font-bold text-sm tracking-widest">01</span>
-                                    <div className="h-px flex-1 bg-[#e63746]/20"></div>
-                                    <span className="text-xs font-bold uppercase tracking-widest text-slate-500">Identity Verification</span>
-                                </div>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 web-card-pulse bg-white/5 p-6 rounded-xl border border-white/5">
-                                    <div className="flex flex-col gap-2">
-                                        <label className="text-[10px] font-bold text-[#e63746] uppercase tracking-[0.2em] ml-1">Agent Codename</label>
-                                        <div className="relative neon-border rounded-lg bg-[#211112]/50 border border-[#e63746]/30 focus-within:ring-2 focus-within:ring-[#e63746]/40">
-                                            <input
-                                                id="name"
-                                                name="name"
-                                                required
-                                                value={formData.name}
-                                                onChange={handleChange}
-                                                className="w-full bg-transparent border-none text-slate-100 placeholder:text-slate-600 focus:ring-0 p-4 text-sm font-medium outline-none"
-                                                placeholder="e.g. Arachnid_01"
-                                                type="text"
-                                            />
-                                            <span className="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-[#e63746]/40">fingerprint</span>
-                                        </div>
-                                    </div>
-                                    <div className="flex flex-col gap-2">
-                                        <label className="text-[10px] font-bold text-[#e63746] uppercase tracking-[0.2em] ml-1">Comm Channel (Email)</label>
-                                        <div className="relative neon-border rounded-lg bg-[#211112]/50 border border-[#e63746]/30 focus-within:ring-2 focus-within:ring-[#e63746]/40">
-                                            <input
-                                                id="email"
-                                                name="email"
-                                                required
-                                                value={formData.email}
-                                                onChange={handleChange}
-                                                className="w-full bg-transparent border-none text-slate-100 placeholder:text-slate-600 focus:ring-0 p-4 text-sm font-medium outline-none"
-                                                placeholder="secure@stark.id"
-                                                type="email"
-                                            />
-                                            <span className="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-[#e63746]/40">alternate_email</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 web-card-pulse bg-white/5 p-6 rounded-xl border border-white/5">
-                                    <div className="flex flex-col gap-2">
-                                        <label className="text-[10px] font-bold text-[#e63746] uppercase tracking-[0.2em] ml-1">Training Academy (College)</label>
-                                        <div className="relative neon-border rounded-lg bg-[#211112]/50 border border-[#e63746]/30 focus-within:ring-2 focus-within:ring-[#e63746]/40">
-                                            <input
-                                                id="college"
-                                                name="college"
-                                                required
-                                                value={formData.college}
-                                                onChange={handleChange}
-                                                className="w-full bg-transparent border-none text-slate-100 placeholder:text-slate-600 focus:ring-0 p-4 text-sm font-medium outline-none"
-                                                placeholder="Tech University"
-                                                type="text"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="flex flex-col gap-2">
-                                        <label className="text-[10px] font-bold text-[#e63746] uppercase tracking-[0.2em] ml-1">Division (Department)</label>
-                                        <div className="relative neon-border rounded-lg bg-[#211112]/50 border border-[#e63746]/30 focus-within:ring-2 focus-within:ring-[#e63746]/40">
-                                            <input
-                                                id="department"
-                                                name="department"
-                                                required
-                                                value={formData.department}
-                                                onChange={handleChange}
-                                                className="w-full bg-transparent border-none text-slate-100 placeholder:text-slate-600 focus:ring-0 p-4 text-sm font-medium outline-none"
-                                                placeholder="Computer Science"
-                                                type="text"
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="flex flex-col gap-2">
-                                    <label className="text-[10px] font-bold text-[#e63746] uppercase tracking-[0.2em] ml-1">Service Year</label>
-                                    <select
-                                        id="year"
-                                        name="year"
-                                        value={formData.year}
+                        <form className="space-y-6" onSubmit={handleSubmit}>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div className="space-y-2">
+                                    <label className="text-sm font-bold text-white/60 uppercase tracking-widest ml-1">First Name</label>
+                                    <input
+                                        name="firstName"
+                                        value={formData.firstName}
                                         onChange={handleChange}
-                                        className="w-full bg-[#211112]/50 border border-[#e63746]/30 rounded-lg text-slate-100 p-4 text-sm font-medium focus:ring-2 focus:ring-[#e63746]/40 focus:border-[#e63746]/60 outline-none appearance-none"
-                                    >
-                                        <option value="1">1st Year</option>
-                                        <option value="2">2nd Year</option>
-                                        <option value="3">3rd Year</option>
-                                        <option value="4">4th Year</option>
-                                    </select>
+                                        required
+                                        className="w-full bg-[#121212] border border-white/10 rounded-xl px-4 py-4 text-white focus:border-primary focus:ring-0 transition-all outline-none placeholder:text-white/20"
+                                        placeholder="Elon"
+                                        type="text"
+                                    />
                                 </div>
-                                <div className="flex flex-col gap-2">
-                                    <label className="text-[10px] font-bold text-[#e63746] uppercase tracking-[0.2em] ml-1">Specialization Sector</label>
-                                    <select
-                                        id="event"
-                                        name="event"
-                                        value={formData.event}
+                                <div className="space-y-2">
+                                    <label className="text-sm font-bold text-white/60 uppercase tracking-widest ml-1">Last Name</label>
+                                    <input
+                                        name="lastName"
+                                        value={formData.lastName}
                                         onChange={handleChange}
-                                        className="w-full bg-[#211112]/50 border border-[#e63746]/30 rounded-lg text-slate-100 p-4 text-sm font-medium focus:ring-2 focus:ring-[#e63746]/40 focus:border-[#e63746]/60 outline-none appearance-none"
-                                    >
-                                        <option value="Code Conquest">Code Conquest</option>
-                                        <option value="Paper Presentation">Paper Presentation</option>
-                                        <option value="Robo Soccer">Robo Soccer</option>
-                                        <option value="Gaming Central">Gaming Central</option>
-                                        <option value="Photography">Photography</option>
-                                        <option value="Treasure Hunt">Treasure Hunt</option>
-                                        <option value="Web-Fluid Chemistry">Web-Fluid Chemistry</option>
-                                        <option value="Nano-Suit Engineering">Nano-Suit Engineering</option>
-                                        <option value="Multiversal Theory">Multiversal Theory</option>
-                                        <option value="Urban Reconnaissance">Urban Reconnaissance</option>
-                                    </select>
+                                        required
+                                        className="w-full bg-[#121212] border border-white/10 rounded-xl px-4 py-4 text-white focus:border-primary focus:ring-0 transition-all outline-none placeholder:text-white/20"
+                                        placeholder="Musk"
+                                        type="text"
+                                    />
                                 </div>
                             </div>
 
-                            {/* Section 3: Terms & Authorization */}
-                            <div className="space-y-6 pt-4">
-                                <div className="flex items-start gap-3">
-                                    <div className="pt-1">
-                                        <input
-                                            required
-                                            className="size-4 rounded border-[#e63746]/40 bg-[#211112] text-[#e63746] focus:ring-[#e63746] focus:ring-offset-[#211112] cursor-pointer"
-                                            type="checkbox"
-                                        />
-                                    </div>
-                                    <p className="text-[11px] text-slate-400 leading-relaxed uppercase tracking-wide">
-                                        I acknowledge that participating in the Spider-Symposium involves exposure to
-                                        high-energy multiverse particles. I agree to non-disclosure protocols regarding Stark Industries proprietary tech.
-                                    </p>
+                            <div className="space-y-2">
+                                <label className="text-sm font-bold text-white/60 uppercase tracking-widest ml-1">Email Address</label>
+                                <div className="relative">
+                                    <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-white/30">mail</span>
+                                    <input
+                                        name="email"
+                                        value={formData.email}
+                                        onChange={handleChange}
+                                        required
+                                        className="w-full bg-[#121212] border border-white/10 rounded-xl pl-12 pr-4 py-4 text-white focus:border-primary focus:ring-0 transition-all outline-none placeholder:text-white/20"
+                                        placeholder="elon@spacex.com"
+                                        type="email"
+                                    />
                                 </div>
-                                <button className="mask-btn w-full" type="submit" style={{ '--primary': '#e63746' }}>
-                                    <span className="tracking-widest relative z-10 px-8 py-3 w-full h-full flex items-center justify-center font-bold">AUTHORIZE MISSION</span>
+                            </div>
+
+                            <div className="space-y-2">
+                                <label className="text-sm font-bold text-white/60 uppercase tracking-widest ml-1">Current Role / Organization</label>
+                                <select
+                                    name="role"
+                                    value={formData.role}
+                                    onChange={handleChange}
+                                    className="w-full bg-[#121212] border border-white/10 rounded-xl px-4 py-4 text-white focus:border-primary focus:ring-0 transition-all outline-none appearance-none"
+                                >
+                                    <option value="Developer / Engineer">Developer / Engineer</option>
+                                    <option value="Designer">Designer</option>
+                                    <option value="Startup Founder">Startup Founder</option>
+                                    <option value="Student">Student</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+
+                            <div className="pt-4 flex items-center justify-between gap-4">
+                                <button onClick={() => navigate(-1)} className="px-8 py-4 text-white/40 font-bold hover:text-white transition-colors" type="button">
+                                    Cancel
+                                </button>
+                                <button type="submit" className="bg-accent text-white px-10 py-4 rounded-xl font-bold shadow-[0_4px_0_0_#b51b61] hover:translate-y-[2px] hover:shadow-none transition-all flex items-center gap-2 uppercase tracking-tighter">
+                                    Next Step
+                                    <span className="material-symbols-outlined">arrow_forward</span>
                                 </button>
                             </div>
                         </form>
                     </div>
                 </div>
-            </main>
-        </div>
+
+                {/* Right Side: Info Card */}
+                <div className="space-y-6">
+                    <div className="bg-[#181818] border border-white/10 rounded-2xl overflow-hidden group">
+                        <div className="aspect-video relative overflow-hidden">
+                            <img className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Cyberpunk futuristic tech conference hall" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfRUICGv2xb9onPFUss5wc2qaACdu0aOkQseajnshgRj3GmVli7ueM5Za-enVNZdq1I8RxWDsQ1MUv_MHiw66nzQju6D-PZTZ0rHESbg21HzRvXyf4JcyigPKu3oGGp-e10u-OwqrYWlnfTE52bpE3aC0htuS0aUCt5e3DpR8q-LHCAS9s6bMmrVZYF021C4ETvfY7EUE1rFBwAzyo1uvKj2aaFkM20uZ4avBr1AUUxvkrJU45PTbBEF4vMVOVageosPDYtrOE1Etn" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-[#181818] to-transparent"></div>
+                            <div className="absolute bottom-4 left-4">
+                                <span className="bg-primary text-[#121212] text-[10px] font-black px-2 py-1 rounded-sm uppercase mb-2 inline-block">Featured</span>
+                                <h3 className="text-lg font-bold text-white leading-tight">{formData.event}</h3>
+                            </div>
+                        </div>
+                        <div className="p-6 space-y-4">
+                            <div className="flex items-center gap-3 text-slate-400 text-sm">
+                                <span className="material-symbols-outlined text-accent text-lg">calendar_today</span>
+                                <span>October 12-14, 2026</span>
+                            </div>
+                            <div className="flex items-center gap-3 text-slate-400 text-sm">
+                                <span className="material-symbols-outlined text-accent text-lg">location_on</span>
+                                <span>Neo Tokyo Center</span>
+                            </div>
+
+                            <div className="pt-4 border-t border-white/5">
+                                <p className="text-xs text-white/40 uppercase tracking-widest font-bold mb-3">Event Perks</p>
+                                <ul className="space-y-2">
+                                    <li className="flex items-center gap-2 text-sm text-white/70">
+                                        <span className="material-symbols-outlined text-primary text-base">check_circle</span>
+                                        Lifetime NFT Access Pass
+                                    </li>
+                                    <li className="flex items-center gap-2 text-sm text-white/70">
+                                        <span className="material-symbols-outlined text-primary text-base">check_circle</span>
+                                        AI Workshops &amp; Sprints
+                                    </li>
+                                    <li className="flex items-center gap-2 text-sm text-white/70">
+                                        <span className="material-symbols-outlined text-primary text-base">check_circle</span>
+                                        Exclusive Networking Gala
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Assistance Card */}
+                    <div className="glass-morphism rounded-2xl p-6 border border-primary/20">
+                        <div className="flex items-center gap-4">
+                            <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
+                                <span className="material-symbols-outlined text-primary">support_agent</span>
+                            </div>
+                            <div>
+                                <h4 className="font-bold text-white">Need Help?</h4>
+                                <p className="text-xs text-slate-400">Our concierge team is here 24/7</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* Hidden Previews (For Future Visual Context only) */}
+            <div className="mt-20 opacity-20 grayscale pointer-events-none hidden md:block">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="glass-morphism rounded-2xl p-8 border-white/5">
+                        <div className="flex items-center gap-2 mb-6 text-primary">
+                            <span className="material-symbols-outlined">qr_code_2</span>
+                            <span className="font-bold uppercase tracking-widest text-sm">Step 3 Preview: UPI Payment</span>
+                        </div>
+                        <div className="bg-white p-4 rounded-xl inline-block mb-4 mx-auto">
+                            <div className="w-48 h-48 bg-slate-200 flex items-center justify-center">
+                                <span className="material-symbols-outlined text-slate-800 text-6xl">qr_code_2</span>
+                            </div>
+                        </div>
+                        <p className="text-center text-sm font-bold text-white">SCAN TO PAY: ₹2,999</p>
+                    </div>
+                </div>
+            </div>
+        </main>
     );
 };
 

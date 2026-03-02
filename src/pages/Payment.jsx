@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import qrImage from '../assets/qr.jpeg';
 import './Payment.css';
 
@@ -13,176 +13,146 @@ const Payment = () => {
         }
     };
 
-    const handleVerifyClick = () => {
+    const handleComplete = () => {
         if (!file) {
-            alert('Security Breach: No proof uploaded. FRIDAY requires a biometric receipt scan.');
+            alert('Security Requirement: Please upload your payment screenshot before proceeding.');
             return;
         }
-        alert('Transmission Successful! Stark HQ is verifying your credentials. Welcome to the web.');
+        alert('Transaction Successful! Your Digital Pass is being generated and will be emailed shortly.');
         navigate('/');
     };
 
+    const handleDownloadClick = () => {
+        const link = document.createElement('a');
+        link.href = qrImage;
+        link.download = 'TechVista2026_QR.jpg';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    };
+
     return (
-        <div className="bg-background-light dark:bg-[#120809] text-slate-900 dark:text-slate-100 min-h-screen flex flex-col font-display w-full relative pt-24">
+        <main className="flex-1 max-w-6xl mx-auto w-full px-4 py-10 md:py-16">
+            <div className="mb-12 max-w-2xl mx-auto">
+                <div className="flex justify-between items-center mb-4">
+                    <span className="text-primary text-sm font-bold uppercase tracking-widest">Step 3: Payment</span>
+                    <span className="text-slate-400 text-xs font-medium">Progress: 100%</span>
+                </div>
+                <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                    <div className="h-full bg-primary rounded-full w-full"></div>
+                </div>
+            </div>
 
-            <main className="flex-1 max-w-7xl mx-auto w-full p-6 grid grid-cols-1 lg:grid-cols-12 gap-8 z-10">
-                {/* Left Sidebar: Nav & Status */}
-                <aside className="lg:col-span-3 flex flex-col gap-6">
-                    <div className="bg-[#1c0d0e] border border-[#e63746]/20 p-6 rounded-xl flex flex-col gap-4 glow-border">
-                        <div className="flex items-center gap-3 p-3 bg-[#e63746]/10 rounded-lg text-[#e63746]">
-                            <span className="material-symbols-outlined">account_balance_wallet</span>
-                            <span className="text-sm font-bold uppercase tracking-wider">Payment Hub</span>
-                        </div>
-                        <div className="flex items-center gap-3 p-3 text-slate-400 hover:bg-white/5 rounded-lg transition-all cursor-pointer">
-                            <span className="material-symbols-outlined">history</span>
-                            <span className="text-sm font-bold uppercase tracking-wider">Ledger</span>
-                        </div>
-                        <div className="flex items-center gap-3 p-3 text-slate-400 hover:bg-white/5 rounded-lg transition-all cursor-pointer">
-                            <span className="material-symbols-outlined">verified_user</span>
-                            <span className="text-sm font-bold uppercase tracking-wider">Authentication</span>
-                        </div>
-                        <div className="mt-4 pt-4 border-t border-[#e63746]/10">
-                            <p className="text-[10px] text-slate-500 uppercase tracking-widest mb-2">Network Status</p>
-                            <div className="flex items-center gap-2">
-                                <div className="w-2 h-2 rounded-full bg-[#00f2ff] web-swing-loader"></div>
-                                <span className="text-xs font-mono text-[#00f2ff]">NODE_ACTIVE: NYC_SEC_01</span>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div className="lg:col-span-2 space-y-6">
+                    <div className="glass-card rounded-2xl p-8 border border-white/5 shadow-2xl relative overflow-hidden">
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 blur-3xl -z-10"></div>
+
+                        <h2 className="text-2xl font-bold mb-2 text-white">Complete Your Payment</h2>
+                        <p className="text-slate-400 mb-8">Scan the QR code below using any UPI app to settle the registration fee.</p>
+
+                        <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
+                            <div className="p-4 bg-white rounded-xl shadow-[0_0_25px_rgba(29,185,84,0.2)]">
+                                <img alt="UPI Payment QR Code" className="w-48 h-48 object-contain" src={qrImage} />
                             </div>
-                        </div>
-                    </div>
-                    <div className="bg-[#e63746]/5 border border-[#e63746]/10 p-6 rounded-xl">
-                        <h3 className="text-xs font-bold text-[#e63746] uppercase tracking-widest mb-3 italic">Symposium Access</h3>
-                        <p className="text-sm text-slate-400 leading-relaxed">
-                            Access to the <span className="text-slate-100">Spider-Man Symposium</span> requires a verified
-                            Stark-issued transaction protocol.
-                        </p>
-                    </div>
-                </aside>
 
-                {/* Main Content: Transaction Area */}
-                <section className="lg:col-span-9 flex flex-col gap-8">
-                    <div className="flex flex-col gap-2">
-                        <h2 className="text-4xl font-black text-slate-100 tracking-tighter uppercase spider-title">Transaction Protocol</h2>
-                        <div className="h-1 w-24 bg-[#e63746]"></div>
-                        <p className="text-slate-400 text-sm mt-2 uppercase tracking-widest">Gateway: Secure_Spider_Node_42</p>
-                    </div>
-
-                    {/* UPI & QR Data Section */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="bg-[#1c0d0e] border border-[#e63746]/30 rounded-xl overflow-hidden relative group web-card-pulse">
-                            <div className="absolute inset-0 bg-gradient-to-br from-[#e63746]/5 to-transparent opacity-50"></div>
-                            <div className="p-6 relative z-10">
-                                <div className="flex justify-between items-start mb-8">
-                                    <div>
-                                        <p className="text-[10px] text-[#e63746] font-bold uppercase tracking-widest">Protocol ID</p>
-                                        <p className="text-lg font-mono text-slate-100">ST-42-99-SPDR</p>
-                                    </div>
-                                    <span className="material-symbols-outlined text-[#00f2ff] blue-glow border p-2 rounded-lg border-[#00f2ff]/20">qr_code_2</span>
+                            <div className="flex-1 space-y-4 text-center md:text-left">
+                                <div className="space-y-1">
+                                    <p className="text-slate-400 text-sm uppercase tracking-tighter">Total Amount Due</p>
+                                    <p className="text-4xl font-bold text-primary">₹2,999</p>
                                 </div>
-                                <div className="space-y-4 mb-8">
-                                    <div className="p-4 bg-black/40 border border-[#e63746]/10 rounded-lg">
-                                        <p className="text-[10px] text-slate-500 uppercase mb-1">UPI Destination</p>
-                                        <div className="flex justify-between items-center">
-                                            <p className="font-mono text-slate-100 italic">stark-symposium@okaxis</p>
-                                            <button
-                                                className="text-[#e63746] hover:text-white transition-colors"
-                                                onClick={() => navigator.clipboard.writeText('stark-symposium@okaxis')}
-                                            >
-                                                <span className="material-symbols-outlined text-sm">content_copy</span>
-                                            </button>
-                                        </div>
+
+                                <div className="space-y-3 pt-4">
+                                    <div className="flex items-center gap-3 text-slate-300">
+                                        <span className="material-symbols-outlined text-primary">verified_user</span>
+                                        <span className="text-sm">Secure Merchant: TechVista Events</span>
                                     </div>
-                                    <div className="p-4 bg-black/40 border border-[#e63746]/10 rounded-lg">
-                                        <p className="text-[10px] text-slate-500 uppercase mb-1">Amount Due</p>
-                                        <p className="text-2xl font-bold text-white tracking-tighter">
-                                            4,999.00 <span className="text-sm font-normal text-[#e63746]">CREDITS</span>
-                                        </p>
+                                    <div className="flex items-center gap-3 text-slate-300">
+                                        <span className="material-symbols-outlined text-primary">schedule</span>
+                                        <span className="text-sm">QR expires in 14:59 minutes</span>
                                     </div>
                                 </div>
-                                <button
-                                    className="mask-btn w-full h-[50px]"
-                                    style={{ '--primary': '#e63746' }}
-                                    onClick={() => window.open('upi://pay?pa=stark-symposium@okaxis&pn=Stark%20Industries&am=4999.00')}
-                                >
-                                    <span className="relative z-10 w-full h-full flex items-center justify-center font-bold tracking-widest text-sm">OPEN UPI APP</span>
+
+                                <button onClick={handleDownloadClick} className="three-d-button mt-4 bg-white/10 hover:bg-white/20 text-white px-6 py-2.5 rounded-lg text-sm font-semibold transition-all flex items-center justify-center md:justify-start gap-2 w-full md:w-auto">
+                                    <span className="material-symbols-outlined text-lg">download</span>
+                                    Download QR
                                 </button>
                             </div>
                         </div>
-
-                        {/* QR CODE Display */}
-                        <div className="bg-[#1c0d0e] border border-[#00f2ff]/20 rounded-xl flex flex-col items-center justify-center p-8 relative overflow-hidden">
-                            <div className="absolute top-0 left-0 p-2 opacity-30">
-                                <div className="w-4 h-4 border-t-2 border-l-2 border-[#00f2ff]"></div>
-                            </div>
-                            <div className="absolute top-0 right-0 p-2 opacity-30">
-                                <div className="w-4 h-4 border-t-2 border-r-2 border-[#00f2ff]"></div>
-                            </div>
-                            <div className="absolute bottom-0 left-0 p-2 opacity-30">
-                                <div className="w-4 h-4 border-b-2 border-l-2 border-[#00f2ff]"></div>
-                            </div>
-                            <div className="absolute bottom-0 right-0 p-2 opacity-30">
-                                <div className="w-4 h-4 border-b-2 border-r-2 border-[#00f2ff]"></div>
-                            </div>
-
-                            <div className="relative w-48 h-48 bg-white/5 rounded-lg flex items-center justify-center border border-[#00f2ff]/10">
-                                <div className="w-40 h-40 opacity-90 flex items-center justify-center">
-                                    <img
-                                        className="w-full h-full object-contain filter rounded-lg"
-                                        src={qrImage}
-                                        alt="Stark Protocol QR"
-                                    />
-                                </div>
-                                <div className="scan-line"></div>
-                            </div>
-                            <p className="mt-6 text-xs text-[#00f2ff] uppercase tracking-[0.3em] font-bold blue-glow">Scan to Authorize</p>
-                        </div>
                     </div>
 
-                    {/* Proof of Transfer Upload */}
-                    <div className="bg-[#1c0d0e] border-2 border-dashed border-[#e63746]/20 rounded-xl p-10 flex flex-col items-center justify-center gap-4 group hover:border-[#e63746]/40 transition-all cursor-pointer relative overflow-hidden">
-                        <input
-                            type="file"
-                            id="uploadProof"
-                            className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-20"
-                            accept="image/*"
-                            onChange={handleFileChange}
-                        />
-                        <div className="absolute inset-0 bg-[#e63746]/0 group-hover:bg-[#e63746]/5 transition-all z-10 pointer-events-none"></div>
-                        <div className="size-16 rounded-full bg-[#e63746]/10 flex items-center justify-center text-[#e63746] group-hover:scale-110 transition-transform relative z-10">
-                            <span className="material-symbols-outlined text-4xl">cloud_upload</span>
-                        </div>
-                        <div className="text-center relative z-10">
-                            <h3 className="text-lg font-bold text-slate-100 uppercase tracking-tight">Proof of Transfer</h3>
-                            <p className="text-sm text-slate-500 mt-1">
-                                {file ? `Selected file: ${file.name}` : 'Upload transaction screenshot for Stark OS verification'}
+                    <div className="glass-card rounded-2xl p-8 border border-white/5">
+                        <h3 className="text-lg font-bold mb-4 text-white flex items-center gap-2">
+                            <span className="material-symbols-outlined text-primary">upload_file</span>
+                            Upload Payment Screenshot
+                        </h3>
+
+                        <label className="border-2 border-dashed border-white/10 rounded-xl p-10 flex flex-col items-center justify-center bg-white/[0.02] hover:bg-white/[0.04] transition-all cursor-pointer group relative">
+                            <input
+                                type="file"
+                                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                                accept="image/*,.pdf"
+                                onChange={handleFileChange}
+                            />
+                            <span className="material-symbols-outlined text-4xl text-slate-500 mb-3 group-hover:text-primary transition-colors">cloud_upload</span>
+                            <p className="text-slate-300 font-medium mb-1">
+                                {file ? `Selected file: ${file.name}` : 'Click to upload or drag & drop'}
                             </p>
-                        </div>
-                        <div className="flex gap-2 text-[10px] font-mono text-[#e63746]/60 uppercase mt-2 relative z-10">
-                            <span>JPEG</span> • <span>PNG</span> • <span>MAX 5MB</span>
+                            <p className="text-slate-500 text-xs text-center border-t border-white/5 pt-2 mt-2 w-full max-w-xs mx-auto">
+                                PNG, JPG or PDF (Max 5MB)
+                            </p>
+                            <span className="three-d-button mt-6 bg-primary text-black px-8 py-3 rounded-lg font-bold text-sm inline-block">
+                                Select File
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <div className="space-y-6">
+                    <div className="glass-card rounded-2xl p-6 border border-white/5">
+                        <h3 className="text-sm font-bold uppercase tracking-widest text-slate-400 mb-4">Registration Summary</h3>
+                        <div className="space-y-4">
+                            <div className="bg-white/5 rounded-xl p-4 border border-white/5">
+                                <div className="w-full h-32 rounded-lg bg-cover bg-center mb-3" style={{ backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuDQedqiUxeMOM0coNkgmA5FFHNGgKDSfrqwoXbn7OYSsZBTXMYW6Vvh5qrWk3GOyR1xKztzdMKZMZ5GZxPV0Ili9H--HswT7kVcLnpLOE9vPV3iL-3V2tgOpTzmUA6GXUp2VkenStOOl2JajzpT17FdmvOkvBTVi3MMy3eZSdhPvuaJgEvO_N0vwZGlw8ARKRQH03crDdpkq2nv5eBvEVwLUzCjX0hsAHu8B9lpH07GG83i5VFycmyc3eBhMehauXu5wTcFIVkWJyAG')" }}></div>
+                                <p className="text-primary text-xs font-bold mb-1">KEYNOTE EVENT</p>
+                                <h4 className="font-bold text-white mb-1">The Future of AI: 2026 &amp; Beyond</h4>
+                                <p className="text-slate-400 text-xs flex items-center gap-1">
+                                    <span className="material-symbols-outlined text-xs">location_on</span>
+                                    Main Hall • Oct 12, 2026
+                                </p>
+                            </div>
+
+                            <div className="space-y-3 px-2 pt-2 text-white">
+                                <div className="flex justify-between text-sm">
+                                    <span className="text-slate-400">Standard Pass</span>
+                                    <span>₹2,499</span>
+                                </div>
+                                <div className="flex justify-between text-sm">
+                                    <span className="text-slate-400">Workshop Add-on</span>
+                                    <span>₹500</span>
+                                </div>
+                                <div className="border-t border-white/10 pt-3 flex justify-between font-bold">
+                                    <span>Total</span>
+                                    <span className="text-primary">₹2,999</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    {/* Action Area */}
-                    <div className="flex flex-col md:flex-row items-center gap-4 justify-between pt-6 border-t border-[#e63746]/10">
-                        <div className="flex items-center gap-3">
-                            <div className="size-10 rounded-full border border-[#00f2ff]/30 flex items-center justify-center text-[#00f2ff]">
-                                <span className="material-symbols-outlined">verified</span>
-                            </div>
-                            <div>
-                                <p className="text-xs font-bold text-slate-100 uppercase">Verification Engine</p>
-                                <p className="text-[10px] text-slate-500 font-mono italic">FRIDAY_AI READY...</p>
-                            </div>
-                        </div>
-                        <button
-                            className="mask-btn px-12 h-[50px]"
-                            style={{ '--primary': '#e63746' }}
-                            onClick={handleVerifyClick}
-                        >
-                            <span className="relative z-10 w-full h-full flex items-center justify-center font-bold tracking-widest text-sm">VERIFY TRANSACTION</span>
-                        </button>
+                    <button onClick={handleComplete} className="w-full glow-pink bg-accent text-white py-4 rounded-xl font-bold text-lg tracking-tight transition-all active:scale-95 flex items-center justify-center gap-2">
+                        Complete Registration
+                        <span className="material-symbols-outlined">arrow_forward</span>
+                    </button>
+
+                    <div className="flex items-start gap-3 p-4 bg-primary/5 rounded-xl border border-primary/10">
+                        <span className="material-symbols-outlined text-primary shrink-0">info</span>
+                        <p className="text-xs text-slate-400 leading-relaxed">
+                            Your registration will be confirmed within 2 hours of verifying the payment screenshot. You'll receive a confirmation email with your digital pass.
+                        </p>
                     </div>
-                </section>
-            </main>
-        </div>
+                </div>
+            </div>
+        </main>
     );
 };
 

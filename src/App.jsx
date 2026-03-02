@@ -12,40 +12,19 @@ import Contact from './pages/Contact';
 import './index.css';
 
 function App() {
-  React.useEffect(() => {
-    const scripts = ['/js/animations.js', '/js/main.js'];
-    const scriptElements = scripts.map(src => {
-      const script = document.createElement('script');
-      script.src = src;
-      script.async = true;
-      document.body.appendChild(script);
-      return script;
-    });
-
-    return () => {
-      scriptElements.forEach(script => script.remove());
-    };
-  }, []);
-
   return (
     <Router>
-      <div className="app-wrapper">
-        {/* Global Spider-Verse Background & Overlays */}
-        <canvas id="hero-web-canvas" style={{ position: 'fixed', inset: 0, zIndex: -1, pointerEvents: 'none' }}></canvas>
-        <div className="bg-web-layer" id="web-layer-1"></div>
-
+      <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden">
         <Navbar />
-        <main>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/events" element={<Events />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/payment" element={<Payment />} />
-            <Route path="/admin" element={<Admin />} />
-            <Route path="/contact" element={<Contact />} />
-          </Routes>
-        </main>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/events" element={<Events />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/payment" element={<Payment />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
         <Footer />
       </div>
     </Router>

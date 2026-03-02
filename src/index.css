@@ -1,17 +1,16 @@
 @import "../css/animations.css";
 
 :root {
-  --primary: #e63746;
-  --primary-hover: #c52d3a;
-  --secondary: #2563eb;
-  --accent: #00f2ff;
-  --bg-dark: #0f172a;
-  --bg-darker: #020617;
+  --primary: #1DB954;
+  --accent: #F72585;
+  --bg-light: #f6f8f7;
+  --bg-dark: #121212;
+  --card-dark: #181818;
   --text-light: #f8fafc;
   --text-muted: #94a3b8;
-  --glass: rgba(255, 255, 255, 0.03);
+  --glass: rgba(24, 24, 24, 0.7);
   --glass-border: rgba(255, 255, 255, 0.1);
-  --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-main: "Space Grotesk", sans-serif;
 }
 
 * {
@@ -22,18 +21,10 @@
 
 body {
   font-family: var(--font-main);
-  background-color: var(--bg-darker);
+  background-color: var(--bg-dark);
   color: var(--text-light);
   line-height: 1.5;
   overflow-x: hidden;
-}
-
-h1,
-h2,
-h3,
-h4 {
-  font-weight: 700;
-  letter-spacing: -0.025em;
 }
 
 a {
@@ -48,45 +39,40 @@ button {
   font-family: inherit;
 }
 
-/* Glassmorphism utility */
-.glass-card {
-  background: var(--glass);
+/* Generic Glassmorphism Classes (Shared) */
+.glass {
+  background: rgba(24, 24, 24, 0.7);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--glass-border);
-  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
+.glass-morphism {
+  background: rgba(24, 24, 24, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Animations */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.glass-card {
+  background: rgba(24, 24, 24, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.fade-in {
-  animation: fadeIn 0.8s ease-out forwards;
+.layout-container {
+  display: flex;
+  height: 100%;
+  flex-grow: 1;
+  flex-direction: column;
 }
 
-/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--bg-darker);
+  background: var(--bg-dark);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -95,5 +81,5 @@ button {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--primary-hover);
+  background: var(--accent);
 }
