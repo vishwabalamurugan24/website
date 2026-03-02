@@ -12,9 +12,28 @@ import Contact from './pages/Contact';
 import './index.css';
 
 function App() {
+  React.useEffect(() => {
+    const scripts = ['/js/animations.js', '/js/main.js'];
+    const scriptElements = scripts.map(src => {
+      const script = document.createElement('script');
+      script.src = src;
+      script.async = true;
+      document.body.appendChild(script);
+      return script;
+    });
+
+    return () => {
+      scriptElements.forEach(script => script.remove());
+    };
+  }, []);
+
   return (
     <Router>
       <div className="app-wrapper">
+        {/* Global Spider-Verse Background & Overlays */}
+        <canvas id="hero-web-canvas" style={{ position: 'fixed', inset: 0, zIndex: -1, pointerEvents: 'none' }}></canvas>
+        <div className="bg-web-layer" id="web-layer-1"></div>
+
         <Navbar />
         <main>
           <Routes>

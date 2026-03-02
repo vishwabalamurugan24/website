@@ -1,36 +1,22 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT_ID.appspot.com",
-    messagingSenderId: "YOUR_SENDER_ID",
-    appId: "YOUR_APP_ID"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+import { db, doc, updateDoc } from './firebase-config.js';
 
 const paymentForm = document.getElementById('payment-form');
 const paymentContent = document.getElementById('payment-content');
 const successScreen = document.getElementById('success-screen');
 const regIdDisplay = document.getElementById('display-regId');
 
-const recentReg = JSON.parse(localStorage.getItem('recentRegistration') || '{}');
-const docId = localStorage.getItem('pendingRegDocId');
-
 if (paymentForm) {
     paymentForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const transactionId = document.getElementById('transactionId').value;
+        const tid = document.getElementById('transactionId').value;
+        const docId = localStorage.getItem('pendingRegDocId');
+        const recentReg = JSON.parse(localStorage.getItem('recentRegistration') || '{}');
 
         try {
             if (docId) {
                 const regRef = doc(db, "registrations", docId);
                 await updateDoc(regRef, {
-                    transactionId: transactionId,
+                    transactionId: tid,
                     status: 'Pending Verification',
                     updatedAt: new Date()
                 });
@@ -39,13 +25,11 @@ if (paymentForm) {
             paymentContent.style.display = 'none';
             successScreen.style.display = 'block';
             regIdDisplay.innerText = recentReg.regId || 'N/A';
+            localStorage.removeItem('pendingRegDocId');
 
         } catch (err) {
             console.error(err);
-            alert("Firebase error updated details. Showing Success screen for demo.");
-            paymentContent.style.display = 'none';
-            successScreen.style.display = 'block';
-            regIdDisplay.innerText = recentReg.regId || 'N/A';
+            alert("Submission failed. Please try again.");
         }
     });
 }

@@ -1,72 +1,336 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html class="dark" lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Symposium 2026 | Payment</title>
-    <link rel="stylesheet" href="css/style.css">
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Protocol Verification | Stark Tech</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="css/animations.css">
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#e63746",
+                        "accent-blue": "#00f2ff",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#120809",
+                        "card-dark": "#1c0d0e",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .glow-border {
+            box-shadow: 0 0 15px rgba(230, 55, 70, 0.3);
+        }
+
+        .blue-glow {
+            text-shadow: 0 0 8px rgba(0, 242, 255, 0.6);
+        }
+
+        .scan-line {
+            background: linear-gradient(to bottom, transparent, #00f2ff, transparent);
+            height: 2px;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            opacity: 0.5;
+        }
+
+        .no-underline {
+            text-decoration: none;
+        }
+    </style>
 </head>
 
-<body class="subpage">
-    <nav class="navbar scrolled">
-        <div class="container nav-container">
-            <a href="index.html" class="logo">
-                <i data-lucide="rocket" class="logo-icon"></i>
-                <span>SYMPOSIUM 2026</span>
-            </a>
-        </div>
-    </nav>
+<body
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col font-display">
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-progress" id="scrollProgress"></div>
 
-    <div class="payment-page container py-lg pt-nav">
-        <div id="payment-content" class="payment-container glass-card"
-            style="max-width: 900px; margin: 0 auto; padding: 3rem;">
-            <div class="payment-header" style="text-align: center; margin-bottom: 3rem;">
-                <h2>Complete Your Payment</h2>
-                <p>Registration Fee: <strong>₹200</strong></p>
+    <!-- 3D Background with Spider-Man -->
+    <div class="spider-3d-bg" id="spider3DBG">
+        <!-- Moving Light -->
+        <div class="bg-light"></div>
+
+        <!-- Layer 1: Distant Buildings -->
+        <div class="layer-1" id="layer1">
+            <div class="building" style="left: 10%; height: 400px;">
+                <div class="building-window"></div>
+                <div class="building-window"></div>
+                <div class="building-window"></div>
             </div>
-
-            <div class="payment-layout" style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;">
-                <div class="qr-section"
-                    style="text-align: center; background: white; padding: 2rem; border-radius: 1rem; color: black;">
-                    <i data-lucide="qr-code" style="width: 120px; height: 120px; margin-bottom: 1rem;"></i>
-                    <p>Scan to Pay via UPI</p>
-                    <p style="margin-top: 1rem; font-weight: 700;">symposium2026@axisbank</p>
-                </div>
-
-                <form id="payment-form" style="display: flex; flex-direction: column; gap: 1.5rem;">
-                    <div class="form-group">
-                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Transaction ID /
-                            UTR</label>
-                        <input type="text" id="transactionId" required placeholder="12-digit UPI ID"
-                            style="width: 100%; padding: 0.8rem; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 0.5rem; color: white;">
-                    </div>
-                    <div class="form-group">
-                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Upload Screenshot
-                            (Optional for Demo)</label>
-                        <input type="file" id="screenshot" style="width: 100%; color: var(--text-muted);">
-                    </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">Submit
-                        Details</button>
-                </form>
+            <div class="building" style="left: 25%; height: 300px;">
+                <div class="building-window"></div>
+                <div class="building-window"></div>
+            </div>
+            <div class="building" style="left: 40%; height: 500px;">
+                <div class="building-window"></div>
+                <div class="building-window"></div>
+                <div class="building-window"></div>
+                <div class="building-window"></div>
+            </div>
+            <div class="building" style="left: 60%; height: 350px;">
+                <div class="building-window"></div>
+                <div class="building-window"></div>
+            </div>
+            <div class="building" style="left: 75%; height: 450px;">
+                <div class="building-window"></div>
+                <div class="building-window"></div>
+                <div class="building-window"></div>
+            </div>
+            <div class="building" style="left: 90%; height: 380px;">
+                <div class="building-window"></div>
+                <div class="building-window"></div>
             </div>
         </div>
 
-        <div id="success-screen" class="glass-card text-center"
-            style="display: none; max-width: 500px; margin: 0 auto; padding: 4rem;">
-            <i data-lucide="check-circle" style="width: 80px; height: 80px; color: #4ade80; margin-bottom: 2rem;"></i>
-            <h2>Registration Successful!</h2>
-            <p style="margin: 1.5rem 0;">Your Registration ID: <strong id="display-regId"></strong></p>
-            <p style="color: var(--text-muted); margin-bottom: 2rem;">We will verify your payment and send a
-                confirmation email shortly.</p>
-            <a href="index.html" class="btn btn-primary">Return Home</a>
+        <!-- Layer 2: Main Spider-Man Image -->
+        <div class="layer-2" id="layer2">
+            <div class="spider-silhouette"></div>
+        </div>
+
+        <!-- Layer 3: Web Pattern -->
+        <div class="layer-3" id="layer3">
+            <div class="web-pattern-3d"></div>
+        </div>
+
+        <!-- Layer 4: Floating Spiders -->
+        <div class="layer-4" id="layer4">
+            <div class="floating-spider">🕷️</div>
+            <div class="floating-spider">🕷️</div>
+            <div class="floating-spider">🕷️</div>
+            <div class="floating-spider">🕷️</div>
+            <div class="floating-spider">🕷️</div>
+            <div class="floating-spider">🕷️</div>
         </div>
     </div>
 
-    <script src="js/main.js"></script>
-    <script type="module" src="js/payment.js"></script>
-    <script>lucide.createIcons();</script>
+    <!-- Mouse Follow Spider -->
+    <div class="mouse-3d" id="mouse3D">
+        <div class="mouse-spider" id="mouseSpider">🕷️</div>
+    </div>
+
+    <!-- Top Navigation Bar -->
+    <header class="border-b border-primary/20 px-6 py-4 bg-background-dark/80 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="javascript:void(0)" onclick="pageTransition('index.html')"
+                class="flex items-center gap-3 no-underline">
+                <div class="text-primary">
+                    <span class="material-symbols-outlined text-4xl">shield_person</span>
+                </div>
+                <div class="flex flex-col">
+                    <h1 class="text-xl font-bold tracking-tighter text-slate-100 uppercase spider-title">Stark Tech</h1>
+                    <span class="text-[10px] text-primary font-bold tracking-[0.2em]">OS V3.0.1 // PROTOCOL</span>
+                </div>
+            </a>
+            <nav class="hidden md:flex items-center gap-8">
+                <a class="text-sm font-medium hover:text-primary transition-colors uppercase tracking-widest no-underline text-slate-300"
+                    href="javascript:void(0)" onclick="pageTransition('index.html')">Symposium</a>
+                <a class="text-sm font-medium hover:text-primary transition-colors uppercase tracking-widest text-primary border-b-2 border-primary no-underline"
+                    href="javascript:void(0)" onclick="pageTransition('events.html')">Protocols</a>
+                <a class="text-sm font-medium hover:text-primary transition-colors uppercase tracking-widest no-underline text-slate-300"
+                    href="javascript:void(0)" onclick="pageTransition('about.html')">Archive</a>
+            </nav>
+            <div class="flex items-center gap-4">
+                <div
+                    class="px-3 py-1 bg-primary/10 border border-primary/30 rounded text-[10px] text-primary font-bold">
+                    SECURITY: ENCRYPTED
+                </div>
+                <a href="javascript:void(0)" onclick="pageTransition('admin.html')"
+                    class="w-10 h-10 rounded-full border border-primary/50 overflow-hidden no-underline">
+                    <img class="w-full h-full object-cover"
+                        src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=40&h=40" />
+                </a>
+            </div>
+        </div>
+    </header>
+    <main class="flex-1 max-w-7xl mx-auto w-full p-6 grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <!-- Left Sidebar: Nav & Status -->
+        <aside class="lg:col-span-3 flex flex-col gap-6">
+            <div class="bg-card-dark border border-primary/20 p-6 rounded-xl flex flex-col gap-4">
+                <div class="flex items-center gap-3 p-3 bg-primary/10 rounded-lg text-primary">
+                    <span class="material-symbols-outlined">account_balance_wallet</span>
+                    <span class="text-sm font-bold uppercase tracking-wider">Payment Hub</span>
+                </div>
+                <div
+                    class="flex items-center gap-3 p-3 text-slate-400 hover:bg-white/5 rounded-lg transition-all cursor-pointer">
+                    <span class="material-symbols-outlined">history</span>
+                    <span class="text-sm font-bold uppercase tracking-wider">Ledger</span>
+                </div>
+                <div
+                    class="flex items-center gap-3 p-3 text-slate-400 hover:bg-white/5 rounded-lg transition-all cursor-pointer">
+                    <span class="material-symbols-outlined">verified_user</span>
+                    <span class="text-sm font-bold uppercase tracking-wider">Authentication</span>
+                </div>
+                <div class="mt-4 pt-4 border-t border-primary/10">
+                    <p class="text-[10px] text-slate-500 uppercase tracking-widest mb-2">Network Status</p>
+                    <div class="flex items-center gap-2">
+                        <div class="w-2 h-2 rounded-full bg-accent-blue web-swing-loader"></div>
+                        <span class="text-xs font-mono text-accent-blue">NODE_ACTIVE: NYC_SEC_01</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-primary/5 border border-primary/10 p-6 rounded-xl">
+                <h3 class="text-xs font-bold text-primary uppercase tracking-widest mb-3 italic">Symposium Access</h3>
+                <p class="text-sm text-slate-400 leading-relaxed">
+                    Access to the <span class="text-slate-100">Spider-Man Symposium</span> requires a verified
+                    Stark-issued transaction protocol.
+                </p>
+            </div>
+        </aside>
+        <!-- Main Content: Transaction Area -->
+        <section class="lg:col-span-9 flex flex-col gap-8">
+            <div class="flex flex-col gap-2">
+                <h2 class="text-4xl font-black text-slate-100 tracking-tighter uppercase spider-title">Transaction
+                    Protocol</h2>
+                <div class="h-1 w-24 bg-primary"></div>
+                <p class="text-slate-400 text-sm mt-2 uppercase tracking-widest">Gateway: Secure_Spider_Node_42</p>
+            </div>
+            <!-- UPI & QR Data Section -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div
+                    class="bg-card-dark border border-primary/30 rounded-xl overflow-hidden relative group web-card-pulse">
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-50"></div>
+                    <div class="p-6 relative z-10">
+                        <div class="flex justify-between items-start mb-8">
+                            <div>
+                                <p class="text-[10px] text-primary font-bold uppercase tracking-widest">Protocol ID</p>
+                                <p class="text-lg font-mono text-slate-100">ST-42-99-SPDR</p>
+                            </div>
+                            <span class="material-symbols-outlined text-accent-blue blue-glow">qr_code_2</span>
+                        </div>
+                        <div class="space-y-4 mb-8">
+                            <div class="p-4 bg-black/40 border border-primary/10 rounded-lg">
+                                <p class="text-[10px] text-slate-500 uppercase mb-1">UPI Destination</p>
+                                <div class="flex justify-between items-center">
+                                    <p class="font-mono text-slate-100 italic">stark-symposium@okaxis</p>
+                                    <button class="text-primary hover:text-white transition-colors"
+                                        onclick="navigator.clipboard.writeText('stark-symposium@okaxis')">
+                                        <span class="material-symbols-outlined text-sm">content_copy</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="p-4 bg-black/40 border border-primary/10 rounded-lg">
+                                <p class="text-[10px] text-slate-500 uppercase mb-1">Amount Due</p>
+                                <p class="text-2xl font-bold text-white tracking-tighter">4,999.00 <span
+                                        class="text-sm font-normal text-primary">CREDITS</span></p>
+                            </div>
+                        </div>
+                        <button class="mask-btn w-full"
+                            onclick="window.open('upi://pay?pa=stark-symposium@okaxis&pn=Stark%20Industries&am=4999.00')">
+                            <span>OPEN UPI APP</span>
+                        </button>
+                    </div>
+                </div>
+                <!-- QR CODE Placeholder -->
+                <div
+                    class="bg-card-dark border border-accent-blue/20 rounded-xl flex flex-col items-center justify-center p-8 relative overflow-hidden">
+                    <div class="absolute top-0 left-0 p-2 opacity-30">
+                        <div class="w-4 h-4 border-t-2 border-l-2 border-accent-blue"></div>
+                    </div>
+                    <div class="absolute top-0 right-0 p-2 opacity-30">
+                        <div class="w-4 h-4 border-t-2 border-r-2 border-accent-blue"></div>
+                    </div>
+                    <div class="absolute bottom-0 left-0 p-2 opacity-30">
+                        <div class="w-4 h-4 border-b-2 border-l-2 border-accent-blue"></div>
+                    </div>
+                    <div class="absolute bottom-0 right-0 p-2 opacity-30">
+                        <div class="w-4 h-4 border-b-2 border-r-2 border-accent-blue"></div>
+                    </div>
+                    <div
+                        class="relative w-48 h-48 bg-white/5 rounded-lg flex items-center justify-center border border-accent-blue/10">
+                        <div
+                            class="w-40 h-40 opacity-80 mix-blend-screen bg-neutral-900 flex items-center justify-center">
+                            <img class="w-full h-full object-contain filter invert opacity-60"
+                                src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=stark-symposium@okaxis" />
+                        </div>
+                        <div class="scan-line"></div>
+                    </div>
+                    <p class="mt-6 text-xs text-accent-blue uppercase tracking-[0.3em] font-bold blue-glow">Scan to
+                        Authorize</p>
+                </div>
+            </div>
+            <!-- Proof of Transfer Upload -->
+            <div
+                class="bg-card-dark border-2 border-dashed border-primary/20 rounded-xl p-10 flex flex-col items-center justify-center gap-4 group hover:border-primary/40 transition-all cursor-pointer relative overflow-hidden">
+                <input type="file" id="uploadProof" class="absolute inset-0 opacity-0 cursor-pointer" accept="image/*">
+                <div class="absolute inset-0 bg-primary/0 group-hover:bg-primary/5 transition-all"></div>
+                <div
+                    class="size-16 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+                    <span class="material-symbols-outlined text-4xl">cloud_upload</span>
+                </div>
+                <div class="text-center relative z-10">
+                    <h3 class="text-lg font-bold text-slate-100 uppercase tracking-tight">Proof of Transfer</h3>
+                    <p class="text-sm text-slate-500 mt-1">Upload transaction screenshot for Stark OS verification</p>
+                </div>
+                <div class="flex gap-2 text-[10px] font-mono text-primary/60 uppercase mt-2">
+                    <span>JPEG</span> • <span>PNG</span> • <span>MAX 5MB</span>
+                </div>
+            </div>
+            <!-- Action Area -->
+            <div class="flex flex-col md:flex-row items-center gap-4 justify-between pt-6 border-t border-primary/10">
+                <div class="flex items-center gap-3">
+                    <div
+                        class="size-10 rounded-full border border-accent-blue/30 flex items-center justify-center text-accent-blue">
+                        <span class="material-symbols-outlined">verified</span>
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold text-slate-100 uppercase">Verification Engine</p>
+                        <p class="text-[10px] text-slate-500 font-mono italic">FRIDAY_AI READY...</p>
+                    </div>
+                </div>
+                <button id="verifyBtn" class="mask-btn px-12">
+                    <span>VERIFY TRANSACTION</span>
+                </button>
+            </div>
+        </section>
+    </main>
+    <!-- Footer -->
+    <footer class="mt-auto border-t border-primary/10 bg-background-dark py-4 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-6">
+                <div class="flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-green-500"></span>
+                    <span class="text-[10px] font-mono text-slate-500 uppercase">Server: Stark_Tower_Mainframe</span>
+                </div>
+                <div class="text-[10px] font-mono text-slate-500 uppercase">Lat: 40.7128° N, Long: 74.0060° W</div>
+            </div>
+            <div class="text-[10px] text-slate-600 uppercase tracking-widest font-bold">
+                © 2026 Stark Industries. All rights reserved.
+            </div>
+        </div>
+    </footer>
+    <script src="js/animations.js"></script>
+    <script>
+        document.getElementById('verifyBtn').addEventListener('click', () => {
+            const fileInput = document.getElementById('uploadProof');
+            if (!fileInput.files || fileInput.files.length === 0) {
+                alert('Security Breach: No proof uploaded. FRIDAY requires a biometric receipt scan.');
+                return;
+            }
+            alert('Transmission Successful! Stark HQ is verifying your credentials. Welcome to the web.');
+            window.location.href = 'index.html';
+        });
+    </script>
 </body>
 
 </html>

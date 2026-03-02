@@ -1,0 +1,1071 @@
+/* Spider-Verse 3.0 Animation Suite */
+
+/* Web-Shooter Strands */
+/* Advanced Web-Shooter Elements */
+.web-line {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    height: 2px;
+    background: linear-gradient(90deg,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0.9) 20%,
+            rgba(200, 230, 255, 0.9) 50%,
+            rgba(255, 255, 255, 0.9) 80%,
+            rgba(255, 255, 255, 0) 100%);
+    transform-origin: left center;
+    box-shadow: 0 0 15px rgba(100, 200, 255, 0.5);
+    opacity: 0;
+}
+
+.web-splash {
+    position: fixed;
+    pointer-events: none;
+    z-index: 10000;
+    width: 30px;
+    height: 30px;
+    background: radial-gradient(circle,
+            rgba(255, 255, 255, 0.95) 0%,
+            rgba(180, 220, 255, 0.8) 40%,
+            rgba(100, 180, 255, 0.4) 70%,
+            transparent 100%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: splash-anim 0.6s ease-out forwards;
+    filter: blur(1px);
+}
+
+.web-particle {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    width: 4px;
+    height: 4px;
+    background: white;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+@keyframes splash-anim {
+    0% {
+        width: 20px;
+        height: 20px;
+        opacity: 1;
+        filter: blur(0px);
+    }
+
+    100% {
+        width: 150px;
+        height: 150px;
+        opacity: 0;
+        filter: blur(8px);
+    }
+}
+
+@keyframes shoot-web-anim {
+    0% {
+        width: 0;
+        opacity: 1;
+        filter: blur(0px);
+    }
+
+    70% {
+        opacity: 0.8;
+        filter: blur(1px);
+    }
+
+    100% {
+        width: var(--target-distance);
+        opacity: 0;
+        filter: blur(3px);
+    }
+}
+
+/* Swinging Spidey Silhouette */
+.swing-container {
+    position: fixed;
+    top: -50px;
+    left: 50%;
+    z-index: 10000;
+    pointer-events: none;
+    animation: spidey-swing 10s infinite cubic-bezier(0.445, 0.05, 0.55, 0.95);
+}
+
+@keyframes spidey-swing {
+    0% {
+        transform: translateX(-200px) rotate(-15deg);
+    }
+
+    50% {
+        transform: translateX(200px) rotate(15deg);
+    }
+
+    100% {
+        transform: translateX(-200px) rotate(-15deg);
+    }
+}
+
+.spidey-silhouette {
+    width: 60px;
+    height: 60px;
+    fill: #e63746;
+    filter: drop-shadow(0 0 5px #e63746);
+}
+
+/* Spider-Sense Ripple */
+.spider-sense-overlay {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9998;
+    border: 0px solid rgba(230, 55, 70, 0);
+    transition: border 0.3s ease;
+}
+
+.spider-sense-active {
+    border: 20px solid rgba(230, 55, 70, 0.1);
+    animation: sense-pulse 0.5s infinite alternate;
+}
+
+@keyframes sense-pulse {
+    from {
+        border-color: rgba(230, 55, 70, 0.1);
+        box-shadow: inset 0 0 50px rgba(230, 55, 70, 0.1);
+    }
+
+    to {
+        border-color: rgba(230, 55, 70, 0.3);
+        box-shadow: inset 0 0 100px rgba(230, 55, 70, 0.2);
+    }
+}
+
+/* Web Wipe Transition */
+#web-wipe {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    z-index: 10001;
+    transform: translateY(100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wipe-active {
+    animation: web-wipe-anim 1s cubic-bezier(0.87, 0, 0.13, 1) forwards;
+}
+
+@keyframes web-wipe-anim {
+    0% {
+        transform: translateY(100%);
+    }
+
+    50% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-100%);
+    }
+}
+
+/* ===== SPIDER-MAN UI KIT INTEGRATION ===== */
+
+/* Crawling Spider Decorations */
+.spider-title {
+    position: relative;
+    display: inline-block;
+}
+
+.spider-title::before,
+.spider-title::after {
+    content: "🕷️";
+    position: absolute;
+    font-size: 0.6em;
+    animation: spiderCrawl 2s infinite;
+}
+
+.spider-title::before {
+    left: -25px;
+    top: 5px;
+    transform: rotate(-20deg);
+}
+
+.spider-title::after {
+    right: -25px;
+    top: 5px;
+    transform: rotate(20deg);
+}
+
+@keyframes spiderCrawl {
+
+    0%,
+    100% {
+        transform: rotate(-20deg) translateY(0);
+    }
+
+    50% {
+        transform: rotate(-20deg) translateY(-5px);
+    }
+}
+
+/* Web Swing Loader */
+.web-swing-loader {
+    height: 60px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.spider-swing {
+    width: 30px;
+    height: 30px;
+    background: #e74c3c;
+    border-radius: 50%;
+    position: relative;
+    animation: swing 1s infinite ease-in-out;
+    transform-origin: top center;
+}
+
+.spider-swing::before {
+    content: "";
+    position: absolute;
+    top: -30px;
+    left: 14px;
+    width: 2px;
+    height: 30px;
+    background: linear-gradient(white, transparent);
+}
+
+.spider-swing::after {
+    content: "🕷️";
+    position: absolute;
+    top: -5px;
+    left: 5px;
+    font-size: 15px;
+}
+
+@keyframes swing {
+
+    0%,
+    100% {
+        transform: rotate(15deg);
+    }
+
+    50% {
+        transform: rotate(-15deg);
+    }
+}
+
+/* Web Spinner */
+.web-spinner {
+    width: 50px;
+    height: 50px;
+    margin: 20px auto;
+    position: relative;
+    animation: spinner-spin 2s linear infinite;
+}
+
+.web-spinner::before {
+    content: "🕷️";
+    position: absolute;
+    font-size: 24px;
+    top: 13px;
+    left: 13px;
+}
+
+.web-spinner::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #e74c3c;
+    border-right-color: #e74c3c;
+    animation: spinner-spin 1s linear infinite;
+}
+
+@keyframes spinner-spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Web Pulse Loader */
+.web-pulse {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    height: 40px;
+    align-items: center;
+}
+
+.pulse-dot {
+    width: 12px;
+    height: 12px;
+    background: #e74c3c;
+    border-radius: 50%;
+    animation: pulse-loader 1.5s infinite;
+}
+
+.pulse-dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.pulse-dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes pulse-loader {
+
+    0%,
+    100% {
+        transform: scale(1);
+        background: #e74c3c;
+        box-shadow: 0 0 10px #e74c3c;
+    }
+
+    50% {
+        transform: scale(1.5);
+        background: #fff;
+        box-shadow: 0 0 20px #fff;
+    }
+}
+
+/* Mask Button */
+.mask-btn {
+    width: 100%;
+    min-width: 180px;
+    height: 50px;
+    background: linear-gradient(145deg, #e74c3c, #c0392b);
+    border: none;
+    border-radius: 12px;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+}
+
+.mask-eyes {
+    position: absolute;
+    top: 5px;
+    left: 15px;
+    right: 15px;
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+}
+
+.mask-eyes span {
+    width: 15px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    transition: all 0.3s;
+}
+
+.mask-btn:hover .mask-eyes span {
+    width: 18px;
+    height: 22px;
+    background: #f1c40f;
+    box-shadow: 0 0 15px #f1c40f;
+}
+
+.mask-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+}
+
+/* Web Swing Button */
+.web-swing-btn {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1rem;
+    border-radius: 40px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+}
+
+.web-swing-btn::before {
+    content: "🕷️";
+    position: absolute;
+    left: -30px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: left 0.3s;
+}
+
+.web-swing-btn:hover::before {
+    left: 10px;
+    animation: spiderDangle 0.5s infinite;
+}
+
+.web-swing-btn:hover {
+    padding-left: 40px;
+    background: #c0392b;
+    box-shadow: 0 0 15px #e74c3c;
+}
+
+@keyframes spiderDangle {
+
+    0%,
+    100% {
+        transform: translateY(-50%) rotate(0deg);
+    }
+
+    25% {
+        transform: translateY(-55%) rotate(-10deg);
+    }
+
+    75% {
+        transform: translateY(-45%) rotate(10deg);
+    }
+}
+
+/* Web Glow Button */
+.web-glow-btn {
+    background: transparent;
+    border: 2px solid #e74c3c;
+    color: #e74c3c;
+    padding: 12px 24px;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.web-glow-btn:hover {
+    color: white;
+    border-color: white;
+    animation: glowPulse 1s infinite;
+    background: rgba(231, 76, 60, 0.1);
+}
+
+@keyframes glowPulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 8px #e74c3c;
+    }
+
+    50% {
+        box-shadow: 0 0 20px #e74c3c;
+    }
+}
+
+/* Spider Sense Interactive Area */
+.spider-sense-area {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 12px;
+    background: rgba(231, 76, 60, 0.05);
+    padding: 20px;
+    text-align: center;
+}
+
+.sense-waves {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.sense-waves span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(231, 76, 60, 0.2);
+    animation: sense-expand 2s infinite;
+}
+
+.sense-waves span:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.sense-waves span:nth-child(2) {
+    animation-delay: 0.6s;
+}
+
+.sense-waves span:nth-child(3) {
+    animation-delay: 1.2s;
+}
+
+@keyframes sense-expand {
+    0% {
+        width: 0;
+        height: 0;
+        opacity: 1;
+    }
+
+    100% {
+        width: 300px;
+        height: 300px;
+        opacity: 0;
+    }
+}
+
+/* Web Card Pulse Effect */
+.web-card-pulse {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.web-card-pulse:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(231, 76, 60, 0.2);
+    border-color: rgba(231, 76, 60, 0.5) !important;
+}
+
+/* ===== 3D SPIDER-MAN EFFECTS ===== */
+
+.perspective-container {
+    perspective: 2000px;
+}
+
+.grid-3d {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    perspective: 2000px;
+}
+
+.card-3d {
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    cursor: pointer;
+}
+
+/* 3D Floating Ring */
+.floating-spiders {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    transform-style: preserve-3d;
+    animation: rotate3D 20s infinite linear;
+}
+
+@keyframes rotate3D {
+    0% {
+        transform: rotateY(0deg) rotateX(10deg);
+    }
+
+    100% {
+        transform: rotateY(360deg) rotateX(10deg);
+    }
+}
+
+.spider-3d {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: #e74c3c;
+    border-radius: 50%;
+    left: 50%;
+    top: 50%;
+    transform-style: preserve-3d;
+    box-shadow: 0 0 20px rgba(231, 76, 60, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.spider-3d::before {
+    content: "🕷️";
+    position: absolute;
+    font-size: 24px;
+    transform: translateZ(15px);
+}
+
+/* 3D Web Tunnel */
+.web-tunnel {
+    width: 100%;
+    height: 300px;
+    position: relative;
+    transform-style: preserve-3d;
+    animation: tunnelRotate 15s infinite linear;
+}
+
+@keyframes tunnelRotate {
+    0% {
+        transform: rotateY(0deg) rotateX(20deg);
+    }
+
+    100% {
+        transform: rotateY(360deg) rotateX(20deg);
+    }
+}
+
+.tunnel-ring {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border: 2px solid rgba(231, 76, 60, 0.3);
+    border-radius: 50%;
+    left: 50%;
+    top: 50%;
+    transform-style: preserve-3d;
+    box-shadow: 0 0 20px rgba(231, 76, 60, 0.2);
+}
+
+.tunnel-spider {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: #e74c3c;
+    border-radius: 50%;
+    left: 50%;
+    top: 50%;
+    animation: spiderTravel 5s infinite linear;
+}
+
+@keyframes spiderTravel {
+    0% {
+        transform: translateX(-50%) translateY(-50%) translateZ(-200px) rotateY(0deg);
+    }
+
+    100% {
+        transform: translateX(-50%) translateY(-50%) translateZ(200px) rotateY(360deg);
+    }
+}
+
+/* 3D Spider-Cube */
+.spider-cube {
+    width: 150px;
+    height: 150px;
+    position: relative;
+    margin: 50px auto;
+    transform-style: preserve-3d;
+    animation: cubeSpin 10s infinite linear;
+}
+
+@keyframes cubeSpin {
+    0% {
+        transform: rotateX(0deg) rotateY(0deg);
+    }
+
+    100% {
+        transform: rotateX(360deg) rotateY(360deg);
+    }
+}
+
+.cube-face {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    border: 2px solid #e74c3c;
+    background: rgba(231, 76, 60, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5em;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 0 20px rgba(231, 76, 60, 0.2);
+}
+
+.cube-face.front {
+    transform: translateZ(75px);
+}
+
+.cube-face.back {
+    transform: rotateY(180deg) translateZ(75px);
+}
+
+.cube-face.right {
+    transform: rotateY(90deg) translateZ(75px);
+}
+
+.cube-face.left {
+    transform: rotateY(-90deg) translateZ(75px);
+}
+
+.cube-face.top {
+    transform: rotateX(90deg) translateZ(75px);
+}
+
+.cube-face.bottom {
+    transform: rotateX(-90deg) translateZ(75px);
+}
+
+/* 3D Parallax */
+.parallax-scene {
+    width: 100%;
+    height: 300px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    transform-style: preserve-3d;
+}
+
+.parallax-layer {
+    position: absolute;
+    inset: 0;
+    transition: transform 0.1s ease-out;
+}
+
+/* 3D Web Spiral */
+.web-spiral {
+    width: 100%;
+    height: 300px;
+    position: relative;
+    transform-style: preserve-3d;
+    animation: spiralRotate 15s infinite linear;
+}
+
+@keyframes spiralRotate {
+    0% {
+        transform: rotateY(0deg) rotateX(20deg);
+    }
+
+    100% {
+        transform: rotateY(360deg) rotateX(20deg);
+    }
+}
+
+.spiral-point {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #e74c3c;
+    border-radius: 50%;
+    left: 50%;
+    top: 50%;
+    transform-style: preserve-3d;
+    box-shadow: 0 0 15px #e74c3c;
+}
+
+/* 3D Hover Card Advanced */
+.hover-card-3d-adv {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.3s;
+}
+
+.hover-card-3d-adv:hover {
+    transform: rotateX(10deg) rotateY(10deg) translateZ(30px);
+}
+
+.card-icon-3d {
+    font-size: 4em;
+    transform: translateZ(40px);
+    display: block;
+    text-align: center;
+    animation: iconFloat-3d 2s infinite ease-in-out;
+}
+
+@keyframes iconFloat-3d {
+
+    0%,
+    100% {
+        transform: translateZ(40px) translateY(0);
+    }
+
+    50% {
+        transform: translateZ(60px) translateY(-10px);
+    }
+}
+
+/* Floating Instruction Badge */
+.instruction-badge {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(231, 76, 60, 0.9);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-size: 1rem;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    z-index: 1000;
+    animation: badgePulse 2s infinite;
+    transform: translateZ(100px);
+    pointer-events: none;
+}
+
+@keyframes badgePulse {
+
+    0%,
+    100% {
+        transform: translateZ(100px) scale(1);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: translateZ(150px) scale(1.1);
+        opacity: 1;
+    }
+}/* 3D Background System Fixes */
+.spider-3d-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: -2;
+    perspective: 1500px;
+    transform-style: preserve-3d;
+    background: radial-gradient(circle at center, #1a1f2f 0%, #0a0f1e 100%);
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.bg-light {
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    background: radial-gradient(circle at 50% 50%, rgba(231, 76, 60, 0.15) 0%, transparent 60%);
+    animation: lightMove 20s infinite linear;
+    pointer-events: none;
+}
+
+.layer-1, .layer-2, .layer-3, .layer-4 {
+    position: absolute;
+    inset: 0;
+    transform-style: preserve-3d;
+    pointer-events: none;
+}
+
+.layer-1 { transform: translateZ(-300px) scale(1.5); }
+.layer-2 { transform: translateZ(-150px) scale(1.2); }
+.layer-3 { transform: translateZ(0) scale(1); }
+.layer-4 { transform: translateZ(150px) scale(0.8); }
+
+.building {
+    position: absolute;
+    bottom: 0;
+    width: 150px;
+    background: linear-gradient(to top, rgba(15, 20, 34, 0.95), rgba(10, 15, 25, 0.8));
+    border-top: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 40px rgba(0,0,0,0.8);
+}
+
+.building-window {
+    position: absolute;
+    width: 20px;
+    height: 25px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 2px;
+    animation: windowFlicker 4s infinite;
+}
+
+.spider-silhouette {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(45deg, #e63746 0%, #7e1d25 100%);
+    clip-path: polygon(50% 0%, 65% 15%, 75% 10%, 70% 25%, 90% 35%, 75% 45%, 95% 65%, 70% 65%, 65% 100%, 50% 85%, 35% 100%, 30% 65%, 5% 65%, 25% 45%, 10% 35%, 30% 25%, 25% 10%, 35% 15%);
+    filter: drop-shadow(0 0 30px #e63746);
+    opacity: 0.6;
+    animation: spiderFloat 6s infinite ease-in-out;
+}
+
+.web-pattern-3d {
+    position: absolute;
+    inset: -50%;
+    background: repeating-linear-gradient(45deg, rgba(231, 76, 60, 0.05) 0px, transparent 1px, transparent 40px),
+                repeating-linear-gradient(-45deg, rgba(231, 76, 60, 0.05) 0px, transparent 1px, transparent 40px);
+    animation: webMove3D 30s infinite linear;
+}
+
+.floating-spider {
+    position: absolute;
+    font-size: 20px;
+    opacity: 0.4;
+    animation: spiderRoam 15s infinite ease-in-out;
+}
+
+.mouse-3d {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+.mouse-spider {
+    position: absolute;
+    font-size: 24px;
+    filter: drop-shadow(0 0 10px #e63746);
+    transition: left 0.15s ease-out, top 0.15s ease-out;
+}
+
+.web-strand {
+    position: absolute;
+    width: 2px;
+    background: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    transform-origin: top center;
+}
+
+/* 10 Advanced Web Shooter Effects */
+.web-canvas {
+    cursor: crosshair !important;
+}
+
+.basic-web {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 0 20px white;
+    pointer-events: none;
+    z-index: 1001;
+}
+
+.web-line {
+    position: absolute;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        rgba(255,255,255,0) 0%,
+        rgba(255,255,255,1) 20%,
+        rgba(200,230,255,1) 50%,
+        rgba(255,255,255,1) 80%,
+        rgba(255,255,255,0) 100%);
+    transform-origin: left center;
+    box-shadow: 0 0 20px rgba(255,255,255,0.8);
+    pointer-events: none;
+    z-index: 1000;
+}
+
+.web-splash {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(200,230,255,0.8) 40%, transparent 70%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 1010;
+}
+
+.burst-particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 0 15px white;
+    pointer-events: none;
+}
+
+.trap-circle {
+    position: absolute;
+    border: 2px solid rgba(255,255,255,0.5);
+    border-radius: 50%;
+    box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+}
+
+.web-zap {
+    position: absolute;
+    height: 3px;
+    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 20%, rgba(100,200,255,1) 50%, rgba(255,255,255,1) 80%, rgba(255,255,255,0) 100%);
+    transform-origin: left center;
+    filter: blur(1px);
+    pointer-events: none;
+    z-index: 1002;
+}
+
+.whip-segment {
+    position: absolute;
+    width: 4px;
+    background: linear-gradient(to bottom, white, transparent);
+    border-radius: 2px;
+    transform-origin: top;
+    pointer-events: none;
+}
+
+.grapple-point {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 0 30px cyan;
+    transform: translate(-50%, -50%);
+    z-index: 1020;
+}
+
+.storm-particle {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    filter: blur(1px);
+    pointer-events: none;
+}
+
+/* Keyframes */
+@keyframes lightMove {
+    0% { transform: rotate(0deg) translate(-10%, -10%); }
+    100% { transform: rotate(360deg) translate(-10%, -10%); }
+}
+
+@keyframes windowFlicker {
+    0%, 100% { opacity: 0.05; background: rgba(255, 255, 255, 0.05); }
+    50% { opacity: 0.3; background: rgba(255, 255, 150, 0.4); }
+}
+
+@keyframes spiderFloat {
+    0%, 100% { transform: translate(-50%, -50%) translateZ(0) scale(1); }
+    50% { transform: translate(-50%, -55%) translateZ(50px) scale(1.05); }
+}
+
+@keyframes webMove3D {
+    0% { transform: translateZ(-100px) rotate(0deg); }
+    100% { transform: translateZ(-100px) rotate(360deg); }
+}
+
+@keyframes spiderRoam {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(100px, 50px) rotate(90deg); }
+    50% { transform: translate(0, 100px) rotate(180deg); }
+    75% { transform: translate(-100px, 50px) rotate(270deg); }
+    100% { transform: translate(0, 0) rotate(360deg); }
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(0.5); }
+}
+
+@keyframes webGlow {
+    0%, 100% { opacity: 0.3; height: 100px; }
+    50% { opacity: 0.7; height: 150px; filter: drop-shadow(0 0 10px cyan); }
+}
+
+@keyframes buildingFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}

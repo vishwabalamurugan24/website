@@ -4,36 +4,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Symposium 2026 | Admin</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Avengers Intelligence | Admin</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="css/animations.css">
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#e63746",
+                        "secondary": "#2563eb",
+                        "background-dark": "#0f172a",
+                    },
+                    fontFamily: {
+                        "sans": ["Space Grotesk", "sans-serif"]
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        :root {
+            --primary: #e63746;
+            --secondary: #2563eb;
+            --text-secondary: #94a3b8;
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass: rgba(255, 255, 255, 0.03);
+        }
+    </style>
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
 <body class="subpage">
-    <nav class="navbar scrolled">
-        <div class="container nav-container">
-            <a href="index.html" class="logo">
-                <i data-lucide="rocket" class="logo-icon"></i>
-                <span>SYMPOSIUM 2026</span>
-            </a>
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- 3D Background with Spider-Man -->
+    <div class="spider-3d-bg" id="spider3DBG">
+        <!-- Moving Light -->
+        <div class="bg-light"></div>
+
+        <!-- Layer 1: Distant Buildings -->
+        <div class="layer-1" id="layer1">
+            <div class="building" style="left: 10%; height: 400px;">
+                <div class="building-window"></div>
+                <div class="building-window"></div>
+                <div class="building-window"></div>
+            </div>
+            <div class="building" style="left: 25%; height: 300px;">
+                <div class="building-window"></div>
+                <div class="building-window"></div>
+            </div>
+            <div class="building" style="left: 40%; height: 500px;">
+                <div class="building-window"></div>
+                <div class="building-window"></div>
+                <div class="building-window"></div>
+                <div class="building-window"></div>
+            </div>
+            <div class="building" style="left: 60%; height: 350px;">
+                <div class="building-window"></div>
+                <div class="building-window"></div>
+            </div>
+            <div class="building" style="left: 75%; height: 450px;">
+                <div class="building-window"></div>
+                <div class="building-window"></div>
+                <div class="building-window"></div>
+            </div>
+            <div class="building" style="left: 90%; height: 380px;">
+                <div class="building-window"></div>
+                <div class="building-window"></div>
+            </div>
+        </div>
+
+        <!-- Layer 2: Main Spider-Man Image -->
+        <div class="layer-2" id="layer2">
+            <div class="spider-silhouette"></div>
+        </div>
+
+        <!-- Layer 3: Web Pattern -->
+        <div class="layer-3" id="layer3">
+            <div class="web-pattern-3d"></div>
+        </div>
+
+        <!-- Layer 4: Floating Spiders -->
+        <div class="layer-4" id="layer4">
+            <div class="floating-spider">🕷️</div>
+            <div class="floating-spider">🕷️</div>
+            <div class="floating-spider">🕷️</div>
+            <div class="floating-spider">🕷️</div>
+            <div class="floating-spider">🕷️</div>
+            <div class="floating-spider">🕷️</div>
+        </div>
+    </div>
+
+    <!-- Mouse Follow Spider -->
+    <div class="mouse-3d" id="mouse3D">
+        <div class="mouse-spider" id="mouseSpider">🕷️</div>
+    </div>
+    <nav class="navbar">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+            <a href="javascript:void(0)" onclick="pageTransition('index.html')"
+                class="logo hero-font spider-title">Nexus
+                <span>2026</span></a>
             <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="admin.html" class="active">Admin Dashboard</a></li>
+                <li><a href="javascript:void(0)" onclick="pageTransition('index.html')">Home</a></li>
+                <li><a href="javascript:void(0)" onclick="pageTransition('admin.html')" class="active">Intelligence
+                        Dashboard</a></li>
             </ul>
         </div>
     </nav>
 
-    <div class="container py-lg pt-nav">
+    <main class="container" style="padding-top: 10rem;">
         <div id="login-section">
-            <!-- Login Form -->
+            <!-- JS Injection -->
         </div>
         <div id="dashboard-section" style="display: none;">
-            <!-- Dashboard Table -->
+            <!-- JS Injection -->
         </div>
-    </div>
+    </main>
 
+    <script src="js/main.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script type="module" src="js/admin.js"></script>
+    <script src="js/animations.js"></script>
+    <script>lucide.createIcons();</script>
 </body>
 
 </html>

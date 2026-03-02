@@ -25,7 +25,7 @@ const Contact = () => {
     return (
         <div className="contact-page container py-lg">
             <div className="section-header text-center pt-nav">
-                <h1>GET IN <span className="gradient-text">TOUCH</span></h1>
+                <h1 className="spider-title">GET IN <span className="gradient-text">TOUCH</span></h1>
                 <p className="subtitle">Have queries? Our coordinators are here to help.</p>
             </div>
 
@@ -82,8 +82,8 @@ const Contact = () => {
                             required
                         ></textarea>
                     </div>
-                    <button type="submit" className="btn btn-primary full-width">
-                        Send Message <Send size={18} />
+                    <button type="submit" className="mask-btn full-width">
+                        <span>SEND MESSAGE</span>
                     </button>
                     {status && <p className="status-msg">{status}</p>}
                 </form>

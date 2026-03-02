@@ -1,225 +1,172 @@
-:root {
-    --primary: #6366f1;
-    --primary-hover: #4f46e5;
-    --secondary: #a855f7;
-    --accent: #22d3ee;
-    --bg-dark: #0f172a;
-    --bg-darker: #020617;
-    --text-light: #f8fafc;
-    --text-muted: #94a3b8;
-    --glass: rgba(255, 255, 255, 0.03);
-    --glass-border: rgba(255, 255, 255, 0.1);
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/* ─── Fonts ─── */
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap');
+/* Note: Cabinet Grotesk is used as a fallback or if local assets exist. Falling back to Space Grotesk for stability if local assets are missing. */
 
-body {
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    background-color: var(--bg-darker);
-    color: var(--text-light);
-    line-height: 1.5;
-    overflow-x: hidden;
-}
+@layer base {
+    :root {
+        --radius: 0.25rem;
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-}
+        /* Spider-Man Dark Theme */
+        --background: 0.13 0.02 264;
+        --foreground: 0.97 0 0;
+        --card: 0.17 0.025 264;
+        --card-foreground: 0.97 0 0;
+        --popover: 0.17 0.025 264;
+        --popover-foreground: 0.97 0 0;
 
-/* Navbar */
-.navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    padding: 1.5rem 0;
-    transition: all 0.3s ease;
-}
+        /* Spider-Red */
+        --primary: 0.52 0.22 27;
+        --primary-foreground: 0.97 0 0;
 
-.navbar.scrolled {
-    padding: 1rem 0;
-    background: rgba(15, 23, 42, 0.8);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--glass-border);
-}
+        /* Spider-Blue */
+        --secondary: 0.32 0.1 264;
+        --secondary-foreground: 0.97 0 0;
 
-.nav-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+        --muted: 0.22 0.04 264;
+        --muted-foreground: 0.65 0.03 264;
 
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-size: 1.25rem;
-    font-weight: 800;
-    color: var(--text-light);
-    letter-spacing: 0.1em;
-    text-decoration: none;
-}
+        /* Web-gold accent */
+        --accent: 0.82 0.14 85;
+        --accent-foreground: 0.1 0 0;
 
-.nav-links {
-    display: flex;
-    list-style: none;
-    gap: 2.5rem;
-    align-items: center;
-}
+        --destructive: 0.52 0.22 27;
+        --destructive-foreground: 0.97 0 0;
 
-.nav-links a {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--text-muted);
-    transition: color 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    text-decoration: none;
-}
+        --border: 0.28 0.05 264;
+        --input: 0.28 0.05 264;
+        --ring: 0.52 0.22 27;
 
-.nav-links a:hover,
-.nav-links a.active {
-    color: var(--primary);
-}
+        --chart-1: 0.52 0.22 27;
+        --chart-2: 0.42 0.12 264;
+        --chart-3: 0.82 0.14 85;
+        --chart-4: 0.7 0.15 142;
+        --chart-5: 0.65 0.18 320;
 
-.admin-btn {
-    background: var(--primary);
-    color: white !important;
-    padding: 0.5rem 1.25rem;
-    border-radius: 9999px;
-    transition: transform 0.2s ease, background 0.2s ease !important;
-}
+        --sidebar: 0.15 0.025 264;
+        --sidebar-foreground: 0.97 0 0;
+        --sidebar-primary: 0.52 0.22 27;
+        --sidebar-primary-foreground: 0.97 0 0;
+        --sidebar-accent: 0.22 0.04 264;
+        --sidebar-accent-foreground: 0.97 0 0;
+        --sidebar-border: 0.28 0.05 264;
+        --sidebar-ring: 0.52 0.22 27;
 
-/* Hero Section */
-.hero {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    position: relative;
-    background-image: radial-gradient(circle at 50% 50%, #1e1b4b 0%, var(--bg-darker) 100%);
-    overflow: hidden;
-}
-
-.hero h1 {
-    font-size: 5rem;
-    margin-bottom: 1.5rem;
-    line-height: 1.1;
-}
-
-.gradient-text {
-    background: linear-gradient(90deg, var(--primary), var(--secondary));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.glass-card {
-    background: var(--glass);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid var(--glass-border);
-    border-radius: 1rem;
-}
-
-.btn {
-    padding: 1rem 2.5rem;
-    border-radius: 0.75rem;
-    font-weight: 600;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    transition: all 0.3s ease;
-    cursor: pointer;
-}
-
-.btn-primary {
-    background: var(--primary);
-    color: white;
-}
-
-.btn-outline {
-    border: 1px solid var(--glass-border);
-    color: var(--text-light);
-    background: var(--glass);
-}
-
-.btn-primary:hover {
-    background: var(--primary-hover);
-    transform: translateY(-2px);
-}
-
-.py-lg {
-    padding: 8rem 0;
-}
-
-.text-center {
-    text-align: center;
-}
-
-.pt-nav {
-    padding-top: 100px;
-}
-
-/* Subpage Utilities */
-.subtitle {
-    color: var(--text-muted);
-    margin-bottom: 2rem;
-}
-
-/* Countdown */
-.countdown-container {
-    display: flex;
-    gap: 2rem;
-    padding: 2rem;
-    justify-content: center;
-    margin-bottom: 3rem;
-    margin-top: 2rem;
-}
-
-.countdown-item {
-    display: flex;
-    flex-direction: column;
-    min-width: 80px;
-}
-
-.count {
-    font-size: 2.5rem;
-    font-weight: 800;
-}
-
-.label {
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    text-transform: uppercase;
-}
-
-/* Events Grid */
-.events-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    margin-top: 3rem;
-}
-
-@media (max-width: 768px) {
-    .hero h1 {
-        font-size: 3rem;
+        /* Custom Spider-Man tokens */
+        --spider-red: oklch(0.52 0.22 27);
+        --spider-red-bright: oklch(0.62 0.25 27);
+        --spider-blue: oklch(0.35 0.12 264);
+        --spider-navy: oklch(0.13 0.02 264);
+        --spider-web: oklch(0.97 0 0);
+        --spider-glow: oklch(0.52 0.22 27 / 0.5);
     }
 
-    .nav-links {
-        display: none;
+    * {
+        @apply border-border;
     }
 
-    .events-grid {
-        grid-template-columns: 1fr;
+    html {
+        color-scheme: dark;
+        scroll-behavior: smooth;
+    }
+
+    body {
+        @apply bg-background text-foreground;
+        font-family: "Bricolage Grotesque", "Cabinet Grotesk", sans-serif;
+        overflow-x: hidden;
+    }
+
+    ::selection {
+        background: oklch(0.52 0.22 27 / 0.4);
+        color: #fff;
+    }
+
+    :focus-visible {
+        outline: 2px solid oklch(0.52 0.22 27);
+        outline-offset: 2px;
+    }
+}
+
+/* ─── Spider-Man Keyframes ─── */
+@layer utilities {
+
+    /* Web-Shooter click burst */
+    @keyframes web-strand {
+        0% {
+            transform: scaleX(0);
+            opacity: 0.9;
+        }
+
+        40% {
+            transform: scaleX(1);
+            opacity: 0.8;
+        }
+
+        100% {
+            transform: scaleX(1);
+            opacity: 0;
+        }
+    }
+
+    @keyframes web-burst-ring {
+        0% {
+            transform: scale(0);
+            opacity: 0.6;
+        }
+
+        100% {
+            transform: scale(2);
+            opacity: 0;
+        }
+    }
+
+    /* Spidey Swing */
+    @keyframes spidey-swing {
+        0% {
+            transform: rotate(-12deg);
+        }
+
+        50% {
+            transform: rotate(12deg);
+        }
+
+        100% {
+            transform: rotate(-12deg);
+        }
+    }
+
+    /* Spider-Sense Ripple */
+    @keyframes spider-sense {
+        0% {
+            box-shadow: 0 0 0 0 oklch(0.52 0.22 27 / 0.4);
+        }
+
+        70% {
+            box-shadow: 0 0 0 15px oklch(0.52 0.22 27 / 0);
+        }
+
+        100% {
+            box-shadow: 0 0 0 0 oklch(0.52 0.22 27 / 0);
+        }
+    }
+
+    .animate-web-strand {
+        animation: web-strand 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+    }
+
+    .animate-web-ring {
+        animation: web-burst-ring 0.5s ease-out forwards;
+    }
+
+    .animate-spidey-swing {
+        transform-origin: top center;
+        animation: spidey-swing 4s ease-in-out infinite;
+    }
+
+    .animate-spider-sense {
+        animation: spider-sense 2s infinite;
     }
 }

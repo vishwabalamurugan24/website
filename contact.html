@@ -4,65 +4,177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Symposium 2026 | Contact</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Contact Headquarters | Nexus 2026</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="css/animations.css">
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#e63746",
+                        "secondary": "#2563eb",
+                        "background-dark": "#0f172a",
+                    },
+                    fontFamily: {
+                        "sans": ["Space Grotesk", "sans-serif"]
+                    },
+                },
+            },
+        }
+    </script>
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
 <body class="subpage">
-    <nav class="navbar scrolled">
-        <div class="container nav-container">
-            <a href="index.html" class="logo">
-                <i data-lucide="rocket" class="logo-icon"></i>
-                <span>SYMPOSIUM 2026</span>
-            </a>
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- 3D Background with Spider-Man -->
+    <div class="spider-3d-bg" id="spider3DBG">
+        <!-- Moving Light -->
+        <div class="bg-light"></div>
+
+        <!-- Layer 1: Distant Buildings -->
+        <div class="layer-1" id="layer1">
+            <div class="building" style="left: 10%; height: 400px;">
+                <div class="building-window"></div>
+                <div class="building-window"></div>
+                <div class="building-window"></div>
+            </div>
+            <div class="building" style="left: 25%; height: 300px;">
+                <div class="building-window"></div>
+                <div class="building-window"></div>
+            </div>
+            <div class="building" style="left: 40%; height: 500px;">
+                <div class="building-window"></div>
+                <div class="building-window"></div>
+                <div class="building-window"></div>
+                <div class="building-window"></div>
+            </div>
+            <div class="building" style="left: 60%; height: 350px;">
+                <div class="building-window"></div>
+                <div class="building-window"></div>
+            </div>
+            <div class="building" style="left: 75%; height: 450px;">
+                <div class="building-window"></div>
+                <div class="building-window"></div>
+                <div class="building-window"></div>
+            </div>
+            <div class="building" style="left: 90%; height: 380px;">
+                <div class="building-window"></div>
+                <div class="building-window"></div>
+            </div>
+        </div>
+
+        <!-- Layer 2: Main Spider-Man Image -->
+        <div class="layer-2" id="layer2">
+            <div class="spider-silhouette"></div>
+        </div>
+
+        <!-- Layer 3: Web Pattern -->
+        <div class="layer-3" id="layer3">
+            <div class="web-pattern-3d"></div>
+        </div>
+
+        <!-- Layer 4: Floating Spiders -->
+        <div class="layer-4" id="layer4">
+            <div class="floating-spider">🕷️</div>
+            <div class="floating-spider">🕷️</div>
+            <div class="floating-spider">🕷️</div>
+            <div class="floating-spider">🕷️</div>
+            <div class="floating-spider">🕷️</div>
+            <div class="floating-spider">🕷️</div>
+        </div>
+    </div>
+
+    <!-- Mouse Follow Spider -->
+    <div class="mouse-3d" id="mouse3D">
+        <div class="mouse-spider" id="mouseSpider">🕷️</div>
+    </div>
+    <nav class="navbar">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+            <a href="javascript:void(0)" onclick="pageTransition('index.html')"
+                class="logo hero-font spider-title">Nexus
+                <span class="text-primary">2026</span></a>
             <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="events.html">Events</a></li>
-                <li><a href="register.html">Register</a></li>
-                <li><a href="contact.html" class="active">Contact</a></li>
-                <li><a href="admin.html" class="admin-btn">Admin</a></li>
+                <li><a href="javascript:void(0)" onclick="pageTransition('index.html')">Home</a></li>
+                <li><a href="javascript:void(0)" onclick="pageTransition('about.html')">About</a></li>
+                <li><a href="javascript:void(0)" onclick="pageTransition('events.html')">Events</a></li>
+                <li><a href="javascript:void(0)" onclick="pageTransition('register.html')">Register</a></li>
+                <li><a href="javascript:void(0)" onclick="pageTransition('contact.html')" class="active">Contact</a>
+                </li>
+                <li><a href="javascript:void(0)" onclick="pageTransition('admin.html')" class="admin-btn"
+                        style="background: #e63746; padding: 0.5rem 1.25rem; border-radius: 50px; color: white;">Admin</a>
+                </li>
             </ul>
         </div>
     </nav>
 
-    <div class="container py-lg pt-nav">
-        <div class="section-header text-center">
-            <h1>GET IN <span class="gradient-text">TOUCH</span></h1>
-            <p class="subtitle">Have queries? Our coordinators are here to help.</p>
-        </div>
+    <main class="container" style="padding-top: 10rem;">
+        <div style="display: grid; grid-template-columns: 1fr 1.5fr; gap: 4rem;">
+            <div>
+                <h1 class="hero-font spider-title" style="font-size: 4rem; margin-bottom: 1rem;">CONTACT <span
+                        class="text-primary">HQ</span></h1>
+                <p style="color: var(--text-secondary); margin-bottom: 3rem;">Need assistance with your mission? Our
+                    team is standing by.</p>
 
-        <div class="contact-layout"
-            style="display: grid; grid-template-columns: 1fr 1.5fr; gap: 3rem; margin-top: 3rem;">
-            <div class="contact-info">
-                <div class="glass-card"
-                    style="padding: 2rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem;">
-                    <i data-lucide="phone" style="color: var(--primary);"></i>
-                    <span>+91 98765 43210</span>
-                </div>
-                <div class="glass-card"
-                    style="padding: 2rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem;">
-                    <i data-lucide="mail" style="color: var(--primary);"></i>
-                    <span>support@symposium.com</span>
+                <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                    <div class="glass-card web-card-pulse"
+                        style="display: flex; align-items: center; gap: 1.5rem; padding: 1.5rem;">
+                        <i data-lucide="phone" class="text-primary"></i>
+                        <div>
+                            <p
+                                style="font-size: 0.7rem; font-weight: 800; color: var(--text-secondary); text-transform: uppercase;">
+                                Direct Line</p>
+                            <p style="font-weight: 900;">+91 98765 43210</p>
+                        </div>
+                    </div>
+                    <div class="glass-card web-card-pulse"
+                        style="display: flex; align-items: center; gap: 1.5rem; padding: 1.5rem;">
+                        <i data-lucide="mail" class="text-secondary"></i>
+                        <div>
+                            <p
+                                style="font-size: 0.7rem; font-weight: 800; color: var(--text-secondary); text-transform: uppercase;">
+                                Encrypted Mail</p>
+                            <p style="font-weight: 900;">support@nexus2026.com</p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <form id="contact-form" class="glass-card"
-                style="padding: 3rem; display: flex; flex-direction: column; gap: 1.5rem;">
-                <input type="text" placeholder="Your Name" required
-                    style="background: var(--glass); border: 1px solid var(--glass-border); padding: 1rem; color: white;">
-                <input type="email" placeholder="Your Email" required
-                    style="background: var(--glass); border: 1px solid var(--glass-border); padding: 1rem; color: white;">
-                <textarea placeholder="Your Message" rows="5" required
-                    style="background: var(--glass); border: 1px solid var(--glass-border); padding: 1rem; color: white;"></textarea>
-                <button type="submit" class="btn btn-primary">Send Message</button>
-            </form>
+            <div class="glass-card">
+                <form id="contact-form" style="display: flex; flex-direction: column; gap: 1.5rem;">
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                        <label style="font-weight: 800; font-size: 0.75rem; text-transform: uppercase;">Full
+                            Name</label>
+                        <input type="text" placeholder="Peter Parker" required
+                            style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px; color: white;">
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                        <label style="font-weight: 800; font-size: 0.75rem; text-transform: uppercase;">Email</label>
+                        <input type="email" placeholder="peter@dailybugle.com" required
+                            style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px; color: white;">
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                        <label style="font-weight: 800; font-size: 0.75rem; text-transform: uppercase;">Inquiry</label>
+                        <textarea placeholder="Your message to the council..." rows="5" required
+                            style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px; color: white;"></textarea>
+                    </div>
+                    <button type="submit" class="mask-btn" style="justify-content: center;">
+                        <span>SEND TO HQ</span>
+                    </button>
+                </form>
+            </div>
         </div>
-    </div>
+    </main>
 
     <script src="js/main.js"></script>
     <script type="module" src="js/contact.js"></script>
+    <script src="js/animations.js"></script>
     <script>lucide.createIcons();</script>
 </body>
 

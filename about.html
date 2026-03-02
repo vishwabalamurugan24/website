@@ -1,56 +1,449 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html class="dark" lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Symposium 2026 | About</title>
-    <link rel="stylesheet" href="css/style.css">
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Spider-Symposium | About Stark Industries</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="css/animations.css">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#e63746",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#211112",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
 </head>
 
-<body class="subpage">
-    <nav class="navbar scrolled">
-        <div class="container nav-container">
-            <a href="index.html" class="logo">
-                <i data-lucide="rocket" class="logo-icon"></i>
-                <span>SYMPOSIUM 2026</span>
-            </a>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html" class="active">About</a></li>
-                <li><a href="events.html">Events</a></li>
-                <li><a href="register.html">Register</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="admin.html" class="admin-btn">Admin</a></li>
-            </ul>
-        </div>
-    </nav>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-progress" id="scrollProgress"></div>
 
-    <div class="container py-lg pt-nav">
-        <div class="section-header text-center">
-            <h1>ABOUT <span class="gradient-text">SYMPOSIUM</span></h1>
-            <p class="subtitle">Learn more about our vision and organizing team.</p>
+    <!-- 3D Background with Spider-Man -->
+    <div class="spider-3d-bg" id="spider3DBG">
+        <!-- Moving Light -->
+        <div class="bg-light"></div>
+
+        <!-- Layer 1: Distant Buildings -->
+        <div class="layer-1" id="layer1">
+            <div class="building" style="left: 10%; height: 400px;">
+                <div class="building-window"></div>
+                <div class="building-window"></div>
+                <div class="building-window"></div>
+            </div>
+            <div class="building" style="left: 25%; height: 300px;">
+                <div class="building-window"></div>
+                <div class="building-window"></div>
+            </div>
+            <div class="building" style="left: 40%; height: 500px;">
+                <div class="building-window"></div>
+                <div class="building-window"></div>
+                <div class="building-window"></div>
+                <div class="building-window"></div>
+            </div>
+            <div class="building" style="left: 60%; height: 350px;">
+                <div class="building-window"></div>
+                <div class="building-window"></div>
+            </div>
+            <div class="building" style="left: 75%; height: 450px;">
+                <div class="building-window"></div>
+                <div class="building-window"></div>
+                <div class="building-window"></div>
+            </div>
+            <div class="building" style="left: 90%; height: 380px;">
+                <div class="building-window"></div>
+                <div class="building-window"></div>
+            </div>
         </div>
 
-        <div class="about-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3rem;">
-            <div class="about-card glass-card" style="padding: 3rem;">
-                <i data-lucide="target" style="color: var(--primary); margin-bottom: 2rem;"></i>
-                <h3>Our Objective</h3>
-                <p style="color: var(--text-muted); margin-top: 1rem;">To provide a platform for students to showcase
-                    their technical prowess and innovative thinking.</p>
-            </div>
-            <div class="about-card glass-card" style="padding: 3rem;">
-                <i data-lucide="users" style="color: var(--primary); margin-bottom: 2rem;"></i>
-                <h3>Organizing Department</h3>
-                <p style="color: var(--text-muted); margin-top: 1rem;">The Department of Computer Science & Engineering
-                    is proud to host this year's symposium.</p>
-            </div>
+        <!-- Layer 2: Main Spider-Man Image -->
+        <div class="layer-2" id="layer2">
+            <div class="spider-silhouette"></div>
+        </div>
+
+        <!-- Layer 3: Web Pattern -->
+        <div class="layer-3" id="layer3">
+            <div class="web-pattern-3d"></div>
+        </div>
+
+        <!-- Layer 4: Floating Spiders -->
+        <div class="layer-4" id="layer4">
+            <div class="floating-spider">🕷️</div>
+            <div class="floating-spider">🕷️</div>
+            <div class="floating-spider">🕷️</div>
+            <div class="floating-spider">🕷️</div>
+            <div class="floating-spider">🕷️</div>
+            <div class="floating-spider">🕷️</div>
         </div>
     </div>
 
-    <script src="js/main.js"></script>
-    <script>lucide.createIcons();</script>
+    <!-- Mouse Follow Spider -->
+    <div class="mouse-3d" id="mouse3D">
+        <div class="mouse-spider" id="mouseSpider">🕷️</div>
+    </div>
+
+    <div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+        <!-- Navigation -->
+        <header
+            class="flex items-center justify-between border-b border-primary/20 px-6 py-4 lg:px-20 backdrop-blur-md sticky top-0 z-50 bg-background-dark/80">
+            <div class="flex items-center gap-3">
+                <div class="text-primary">
+                    <svg class="size-8" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M44 11.2727C44 14.0109 39.8386 16.3957 33.69 17.6364C39.8386 18.877 44 21.2618 44 24C44 26.7382 39.8386 29.123 33.69 30.3636C39.8386 31.6043 44 33.9891 44 36.7273C44 40.7439 35.0457 44 24 44C12.9543 44 4 40.7439 4 36.7273C4 33.9891 8.16144 31.6043 14.31 30.3636C8.16144 29.123 4 26.7382 4 24C4 21.2618 8.16144 18.877 14.31 17.6364C8.16144 16.3957 4 14.0109 4 11.2727C4 7.25611 12.9543 4 24 4C35.0457 4 44 7.25611 44 11.2727Z"
+                            fill="currentColor"></path>
+                    </svg>
+                </div>
+                <h2 class="text-xl font-bold tracking-tight uppercase">Stark Industries</h2>
+            </div>
+            <div class="hidden md:flex gap-8 text-sm font-medium uppercase tracking-widest">
+                <a class="hover:text-primary transition-colors no-underline" href="javascript:void(0)"
+                    onclick="pageTransition('index.html')">Home</a>
+                <a class="hover:text-primary transition-colors no-underline" href="javascript:void(0)"
+                    onclick="pageTransition('events.html')">Missions</a>
+                <a class="text-primary no-underline" href="javascript:void(0)"
+                    onclick="pageTransition('about.html')">About</a>
+                <a class="hover:text-primary transition-colors no-underline" href="javascript:void(0)"
+                    onclick="pageTransition('contact.html')">Protocol</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="javascript:void(0)" onclick="pageTransition('admin.html')"
+                    class="flex items-center justify-center rounded-lg h-10 w-10 bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 transition-all no-underline">
+                    <span class="material-symbols-outlined">shield</span>
+                </a>
+                <a href="javascript:void(0)" onclick="pageTransition('register.html')"
+                    class="bg-primary hover:bg-primary/90 text-white font-bold py-2 px-6 rounded uppercase tracking-widest text-xs transition-all no-underline">
+                    Enroll Now
+                </a>
+            </div>
+        </header>
+        <main class="flex-1 max-w-7xl mx-auto w-full px-6 py-12">
+            <!-- Hero Section: Symposium Objectives -->
+            <section
+                class="relative overflow-hidden rounded-xl bg-primary/5 border border-primary/20 p-8 mb-16 lg:p-16">
+                <div class="absolute top-0 right-0 p-4 opacity-10 pointer-events-none">
+                    <span class="material-symbols-outlined text-[120px]">hub</span>
+                </div>
+                <div class="relative z-10 max-w-2xl">
+                    <span
+                        class="inline-block px-3 py-1 rounded bg-primary/20 text-primary text-xs font-bold tracking-[0.2em] uppercase mb-4">Phase
+                        One: Synchronization</span>
+                    <h1
+                        class="text-5xl lg:text-7xl font-black uppercase tracking-tighter leading-none mb-6 spider-title">
+                        Spider-Symposium</h1>
+                    <p class="text-lg text-slate-400 mb-8 leading-relaxed">
+                        The ultimate gathering of inter-dimensional specialists. Our mission is the harmonization of the
+                        multiverse through advanced bio-engineering and the implementation of robust inter-dimensional
+                        safety protocols.
+                    </p>
+                    <div class="flex flex-wrap gap-6 items-center">
+                        <a href="javascript:void(0)" onclick="pageTransition('register.html')" class="mask-btn">
+                            <span>INITIALIZE MISSION</span>
+                        </a>
+                        <a href="javascript:void(0)" onclick="pageTransition('events.html')" class="web-swing-btn">
+                            View Data Log
+                        </a>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
+                    <div
+                        class="bg-background-dark/60 border border-primary/10 p-6 rounded-lg backdrop-blur-sm group hover:border-primary/40 transition-all web-card-pulse">
+                        <span class="material-symbols-outlined text-primary mb-4 text-3xl">biotech</span>
+                        <h3 class="font-bold text-lg mb-2 uppercase tracking-wide">Species Preservation</h3>
+                        <p class="text-sm text-slate-400">Advanced genetic sequencing to maintain variant stability
+                            across reality collapses.</p>
+                    </div>
+                    <div
+                        class="bg-background-dark/60 border border-primary/10 p-6 rounded-lg backdrop-blur-sm group hover:border-primary/40 transition-all web-card-pulse">
+                        <span class="material-symbols-outlined text-primary mb-4 text-3xl">route</span>
+                        <h3 class="font-bold text-lg mb-2 uppercase tracking-wide">Quantum Web Mapping</h3>
+                        <p class="text-sm text-slate-400">Visualizing the intricate connections of the multiverse to
+                            predict temporal anomalies.</p>
+                    </div>
+                    <div
+                        class="bg-background-dark/60 border border-primary/10 p-6 rounded-lg backdrop-blur-sm group hover:border-primary/40 transition-all">
+                        <span class="material-symbols-outlined text-primary mb-4 text-3xl">shield</span>
+                        <h3 class="font-bold text-lg mb-2 uppercase tracking-wide">Inhibitor Tech</h3>
+                        <p class="text-sm text-slate-400">Deploying localized dampening fields to prevent uncontrolled
+                            dimensional bleed.</p>
+                    </div>
+                </div>
+            </section>
+            <!-- Organizing Department -->
+            <section class="mb-20">
+                <div class="flex items-center gap-4 mb-8">
+                    <h2 class="text-3xl font-bold uppercase tracking-tight">Organizing Department</h2>
+                    <div class="h-[1px] flex-1 bg-gradient-to-r from-primary/50 to-transparent"></div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="relative group aspect-square rounded-lg overflow-hidden border border-primary/20">
+                        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                            style="background-image: url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=400&h=400');">
+                        </div>
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-background-dark via-background-dark/20 to-transparent">
+                        </div>
+                        <div class="absolute bottom-0 left-0 p-4">
+                            <h4 class="text-lg font-bold uppercase leading-none">R&amp;D Division</h4>
+                            <p class="text-xs text-primary font-medium tracking-widest mt-1 uppercase">Tech Development
+                            </p>
+                        </div>
+                    </div>
+                    <div class="relative group aspect-square rounded-lg overflow-hidden border border-primary/20">
+                        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                            style="background-image: url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80&w=400&h=400');">
+                        </div>
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-background-dark via-background-dark/20 to-transparent">
+                        </div>
+                        <div class="absolute bottom-0 left-0 p-4">
+                            <h4 class="text-lg font-bold uppercase leading-none">Bio-Logic Unit</h4>
+                            <p class="text-xs text-primary font-medium tracking-widest mt-1 uppercase">Genetic Research
+                            </p>
+                        </div>
+                    </div>
+                    <div class="relative group aspect-square rounded-lg overflow-hidden border border-primary/20">
+                        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                            style="background-image: url('https://images.unsplash.com/photo-1558494949-ef010cbdcc51?auto=format&fit=crop&q=80&w=400&h=400');">
+                        </div>
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-background-dark via-background-dark/20 to-transparent">
+                        </div>
+                        <div class="absolute bottom-0 left-0 p-4">
+                            <h4 class="text-lg font-bold uppercase leading-none">Quantum Core</h4>
+                            <p class="text-xs text-primary font-medium tracking-widest mt-1 uppercase">Portal Management
+                            </p>
+                        </div>
+                    </div>
+                    <div class="relative group aspect-square rounded-lg overflow-hidden border border-primary/20">
+                        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                            style="background-image: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&q=80&w=400&h=400');">
+                        </div>
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-background-dark via-background-dark/20 to-transparent">
+                        </div>
+                        <div class="absolute bottom-0 left-0 p-4">
+                            <h4 class="text-lg font-bold uppercase leading-none">Ops Command</h4>
+                            <p class="text-xs text-primary font-medium tracking-widest mt-1 uppercase">Field Logistics
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Rules & Ethics: Digital Checklist -->
+                <section>
+                    <div class="flex items-center gap-4 mb-8">
+                        <h2 class="text-3xl font-bold uppercase tracking-tight">Rules &amp; Ethics</h2>
+                        <div class="h-[1px] flex-1 bg-gradient-to-r from-primary/50 to-transparent"></div>
+                    </div>
+                    <div class="bg-primary/5 border border-primary/10 rounded-xl p-6 space-y-4">
+                        <div
+                            class="flex items-start gap-4 p-4 bg-background-dark/40 border-l-4 border-primary rounded-r">
+                            <div class="mt-1">
+                                <span class="material-symbols-outlined text-primary text-xl">check_box</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-100 uppercase text-sm tracking-widest">Temporal
+                                    Non-Interference</h4>
+                                <p class="text-slate-400 text-sm mt-1">Participants must not alter local timelines
+                                    without explicit Stark Authorization.</p>
+                            </div>
+                        </div>
+                        <div
+                            class="flex items-start gap-4 p-4 bg-background-dark/40 border-l-4 border-primary rounded-r">
+                            <div class="mt-1">
+                                <span class="material-symbols-outlined text-primary text-xl">check_box</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-100 uppercase text-sm tracking-widest">Variant
+                                    Verification</h4>
+                                <p class="text-slate-400 text-sm mt-1">All attendees are subject to scan by the
+                                    Arachno-Identity Engine upon arrival.</p>
+                            </div>
+                        </div>
+                        <div
+                            class="flex items-start gap-4 p-4 bg-background-dark/40 border-l-4 border-primary rounded-r opacity-60">
+                            <div class="mt-1">
+                                <span
+                                    class="material-symbols-outlined text-primary/50 text-xl">check_box_outline_blank</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-100 uppercase text-sm tracking-widest">Confidentiality
+                                    Protocol</h4>
+                                <p class="text-slate-400 text-sm mt-1">Advanced technologies displayed are proprietary
+                                    property of Stark Industries.</p>
+                            </div>
+                        </div>
+                        <div
+                            class="flex items-start gap-4 p-4 bg-background-dark/40 border-l-4 border-primary rounded-r opacity-60">
+                            <div class="mt-1">
+                                <span
+                                    class="material-symbols-outlined text-primary/50 text-xl">check_box_outline_blank</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-100 uppercase text-sm tracking-widest">Safe Exit
+                                    Maneuvers</h4>
+                                <p class="text-slate-400 text-sm mt-1">In case of glitching, report immediately to the
+                                    nearest Bio-Stabilization hub.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Itinerary: Vertical Timeline -->
+                <section>
+                    <div class="flex items-center gap-4 mb-8">
+                        <h2 class="text-3xl font-bold uppercase tracking-tight">Itinerary</h2>
+                        <div class="h-[1px] flex-1 bg-gradient-to-r from-primary/50 to-transparent"></div>
+                    </div>
+                    <div class="relative pl-8 space-y-12">
+                        <!-- Timeline Line (The Web Strand) -->
+                        <div
+                            class="absolute left-[11px] top-2 bottom-2 w-[2px] bg-gradient-to-b from-primary via-primary/40 to-primary/10">
+                        </div>
+                        <div class="relative">
+                            <!-- Node -->
+                            <div
+                                class="absolute -left-[27px] top-1.5 size-[14px] rounded-full bg-primary shadow-[0_0_12px_rgba(230,55,70,0.8)] border-2 border-background-dark">
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-primary uppercase tracking-[0.2em]">09:00 AM — Main
+                                    Hub</span>
+                                <h4 class="text-xl font-bold mt-1 uppercase">Opening Keynote</h4>
+                                <p class="text-slate-400 text-sm mt-2">Speaker: Stark AI (Version 12.4). An introduction
+                                    to the Multiversal Stabilization Project.</p>
+                            </div>
+                        </div>
+                        <div class="relative">
+                            <div
+                                class="absolute -left-[27px] top-1.5 size-[14px] rounded-full bg-primary shadow-[0_0_12px_rgba(230,55,70,0.8)] border-2 border-background-dark">
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-primary uppercase tracking-[0.2em]">11:30 AM — Tech
+                                    Lab 4</span>
+                                <h4 class="text-xl font-bold mt-1 uppercase">Advanced Web-Slinging</h4>
+                                <p class="text-slate-400 text-sm mt-2">Workshop on high-tensile organic vs. synthetic
+                                    fluid dynamics in low-gravity environments.</p>
+                            </div>
+                        </div>
+                        <div class="relative opacity-70">
+                            <div
+                                class="absolute -left-[27px] top-1.5 size-[14px] rounded-full bg-primary/40 border-2 border-background-dark">
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-primary uppercase tracking-[0.2em]">02:00 PM — The
+                                    Vortex</span>
+                                <h4 class="text-xl font-bold mt-1 uppercase">Dimensional Mapping</h4>
+                                <p class="text-slate-400 text-sm mt-2">Live simulation of the "Web of Life and Destiny"
+                                    using real-time quantum data.</p>
+                            </div>
+                        </div>
+                        <div class="relative opacity-70">
+                            <div
+                                class="absolute -left-[27px] top-1.5 size-[14px] rounded-full bg-primary/40 border-2 border-background-dark">
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-primary uppercase tracking-[0.2em]">05:00 PM —
+                                    Terrace</span>
+                                <h4 class="text-xl font-bold mt-1 uppercase">Variant Networking</h4>
+                                <p class="text-slate-400 text-sm mt-2">Social mixer for spiders across the multiverse.
+                                    Refreshments provided (All-DNA compatible).</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <!-- 3D Tech Lab -->
+            <section
+                class="py-24 bg-black/40 relative overflow-hidden rounded-2xl border border-white/5 mb-20 perspective-container">
+                <div class="max-w-7xl mx-auto px-6">
+                    <div class="text-center mb-16">
+                        <h2 class="text-3xl font-bold mb-2 spider-title uppercase">3D <span class="text-primary">Stark
+                                Lab</span></h2>
+                        <p class="text-slate-500 uppercase tracking-widest text-[10px]">Quantum Simulation Environment
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <!-- 3D Web Spiral -->
+                        <div class="card-3d bg-white/5 p-8 rounded-xl border border-white/5 flex flex-col items-center">
+                            <h3 class="text-sm font-bold text-white mb-6 uppercase tracking-[0.2em]">Web Spiral</h3>
+                            <div class="web-spiral w-full"></div>
+                        </div>
+
+                        <!-- 3D Spider Cube -->
+                        <div class="card-3d bg-white/5 p-8 rounded-xl border border-white/5 flex flex-col items-center">
+                            <h3 class="text-sm font-bold text-white mb-6 uppercase tracking-[0.2em]">Dimension Cube</h3>
+                            <div class="spider-cube">
+                                <div class="cube-face front">🕷️</div>
+                                <div class="cube-face back">🕸️</div>
+                                <div class="cube-face right">🕷️</div>
+                                <div class="cube-face left">🕸️</div>
+                                <div class="cube-face top">🕷️</div>
+                                <div class="cube-face bottom">🕸️</div>
+                            </div>
+                        </div>
+
+                        <!-- 3D Neural Mask -->
+                        <div class="card-3d bg-white/5 p-8 rounded-xl border border-white/5 flex flex-col items-center">
+                            <h3 class="text-sm font-bold text-white mb-6 uppercase tracking-[0.2em]">Neural Mask</h3>
+                            <div class="mouse-follow-3d w-full h-[150px]">
+                                <div class="follow-layer" data-depth="20">
+                                    <div
+                                        class="w-16 h-24 bg-primary rounded-full relative shadow-[0_0_30px_rgba(230,55,70,0.5)] mx-auto">
+                                        <div class="absolute top-8 left-3 right-3 flex justify-between">
+                                            <span class="w-4 h-6 bg-white rounded-full"></span>
+                                            <span class="w-4 h-6 bg-white rounded-full"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <!-- Footer -->
+        <footer class="mt-20 border-t border-primary/20 py-10 bg-background-dark/50">
+            <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex items-center gap-3 opacity-50">
+                    <div class="text-slate-100">
+                        <svg class="size-6" fill="currentColor" viewbox="0 0 48 48">
+                            <path
+                                d="M44 11.2727C44 14.0109 39.8386 16.3957 33.69 17.6364C39.8386 18.877 44 21.2618 44 24C44 26.7382 39.8386 29.123 33.69 30.3636C39.8386 31.6043 44 33.9891 44 36.7273C44 40.7439 35.0457 44 24 44C12.9543 44 4 40.7439 4 36.7273C4 33.9891 8.16144 31.6043 14.31 30.3636C8.16144 29.123 4 26.7382 4 24C4 21.2618 8.16144 18.877 14.31 17.6364C8.16144 16.3957 4 14.0109 4 11.2727C4 7.25611 12.9543 4 24 4C35.0457 4 44 7.25611 44 11.2727Z">
+                            </path>
+                        </svg>
+                    </div>
+                    <span class="text-sm font-bold tracking-widest uppercase">Stark Industries © 2024</span>
+                </div>
+                <div class="flex gap-8 text-xs font-bold uppercase tracking-widest text-slate-500">
+                    <a class="hover:text-primary transition-colors no-underline" href="javascript:void(0)"
+                        onclick="pageTransition('contact.html')">Privacy Core</a>
+                    <a class="hover:text-primary transition-colors no-underline" href="javascript:void(0)"
+                        onclick="pageTransition('admin.html')">Access Logs</a>
+                    <a class="hover:text-primary transition-colors no-underline" href="javascript:void(0)"
+                        onclick="pageTransition('contact.html')">Support Portal</a>
+                </div>
+            </div>
+        </footer>
+        <script src="js/animations.js"></script>
 </body>
 
 </html>

@@ -43,7 +43,7 @@ const Register = () => {
         <div className="register-page container py-lg">
             <div className="register-container glass-card">
                 <div className="register-header">
-                    <h2>Registration Form</h2>
+                    <h2 className="spider-title">Registration Form</h2>
                     <p>Fill in your details to secure your spot at Symposium 2026.</p>
                 </div>
 
@@ -111,8 +111,8 @@ const Register = () => {
                         </div>
                     </div>
 
-                    <button type="submit" className="btn btn-primary submit-btn">
-                        Proceed to Payment <Send size={18} />
+                    <button type="submit" className="mask-btn submit-btn">
+                        <span>PROCEED TO PAYMENT</span>
                     </button>
                 </form>
             </div>

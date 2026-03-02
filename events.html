@@ -1,69 +1,463 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html class="dark" lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Symposium 2026 | Events</title>
-    <link rel="stylesheet" href="css/style.css">
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Spider-Symposium | Mission Specializations</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="css/animations.css">
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#e63746",
+                        "secondary": "#2563eb",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#120809",
+                        "card-bg": "#1d0e0f",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        .neon-border-red {
+            box-shadow: 0 0 5px rgba(230, 55, 70, 0.2), inset 0 0 10px rgba(230, 55, 70, 0.1);
+            border: 1px solid rgba(230, 55, 70, 0.4);
+        }
+
+        .neon-border-blue {
+            box-shadow: 0 0 5px rgba(37, 99, 235, 0.2), inset 0 0 10px rgba(37, 99, 235, 0.1);
+            border: 1px solid rgba(37, 99, 235, 0.4);
+        }
+
+        .hologram-overlay {
+            background: repeating-linear-gradient(0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(37, 99, 235, 0.05) 3px,
+                    transparent 3px);
+        }
+
+        .no-underline {
+            text-decoration: none;
+        }
+
+        /* Rathinam-style Metadata Boxes */
+        .logistics-box {
+            background: rgba(230, 55, 70, 0.05);
+            border: 1px solid rgba(230, 55, 70, 0.2);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .logistics-box:hover {
+            background: rgba(230, 55, 70, 0.1);
+            border-color: rgba(230, 55, 70, 0.4);
+            transform: translateY(-5px);
+        }
+
+        .box-label {
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--primary);
+            opacity: 0.8;
+        }
+
+        .box-value {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .coordinator-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+    </style>
 </head>
 
-<body class="subpage">
-    <nav class="navbar scrolled">
-        <div class="container nav-container">
-            <a href="index.html" class="logo">
-                <i data-lucide="rocket" class="logo-icon"></i>
-                <span>SYMPOSIUM 2026</span>
-            </a>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="events.html" class="active">Events</a></li>
-                <li><a href="register.html">Register</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="admin.html" class="admin-btn">Admin</a></li>
-            </ul>
-        </div>
-    </nav>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-progress" id="scrollProgress"></div>
 
-    <div class="container py-lg pt-nav">
-        <div class="section-header text-center">
-            <h1>SYMPOSIUM <span class="gradient-text">EVENTS</span></h1>
-            <p class="subtitle">Discover our wide range of technical and non-technical competitions.</p>
+    <!-- 3D Background with Spider-Man -->
+    <div class="spider-3d-bg" id="spider3DBG">
+        <!-- Moving Light -->
+        <div class="bg-light"></div>
+
+        <!-- Layer 1: Distant Buildings -->
+        <div class="layer-1" id="layer1">
+            <div class="building" style="left: 10%; height: 400px;">
+                <div class="building-window"></div>
+                <div class="building-window"></div>
+                <div class="building-window"></div>
+            </div>
+            <div class="building" style="left: 25%; height: 300px;">
+                <div class="building-window"></div>
+                <div class="building-window"></div>
+            </div>
+            <div class="building" style="left: 40%; height: 500px;">
+                <div class="building-window"></div>
+                <div class="building-window"></div>
+                <div class="building-window"></div>
+                <div class="building-window"></div>
+            </div>
+            <div class="building" style="left: 60%; height: 350px;">
+                <div class="building-window"></div>
+                <div class="building-window"></div>
+            </div>
+            <div class="building" style="left: 75%; height: 450px;">
+                <div class="building-window"></div>
+                <div class="building-window"></div>
+                <div class="building-window"></div>
+            </div>
+            <div class="building" style="left: 90%; height: 380px;">
+                <div class="building-window"></div>
+                <div class="building-window"></div>
+            </div>
         </div>
 
-        <div class="events-grid" id="events-grid">
-            <!-- Events will be injected via JS or listed here -->
+        <!-- Layer 2: Main Spider-Man Image -->
+        <div class="layer-2" id="layer2">
+            <div class="spider-silhouette"></div>
+        </div>
+
+        <!-- Layer 3: Web Pattern -->
+        <div class="layer-3" id="layer3">
+            <div class="web-pattern-3d"></div>
+        </div>
+
+        <!-- Layer 4: Floating Spiders -->
+        <div class="layer-4" id="layer4">
+            <div class="floating-spider">🕷️</div>
+            <div class="floating-spider">🕷️</div>
+            <div class="floating-spider">🕷️</div>
+            <div class="floating-spider">🕷️</div>
+            <div class="floating-spider">🕷️</div>
+            <div class="floating-spider">🕷️</div>
         </div>
     </div>
 
-    <script src="js/main.js"></script>
-    <script>
-        lucide.createIcons();
-        const events = [
-            { title: 'Code Conquest', cat: 'Technical', desc: 'Solve complex algorithmic challenges.', icon: 'code' },
-            { title: 'Paper Presentation', cat: 'Technical', desc: 'Present innovative research papers.', icon: 'monitor' },
-            { title: 'Robo Soccer', cat: 'Technical', desc: 'Build robots to compete in soccer.', icon: 'cpu' },
-            { title: 'Gaming Central', cat: 'Non-Technical', desc: 'Compete in popular esports titles.', icon: 'zap' },
-            { title: 'Photography', cat: 'Non-Technical', desc: 'Capture the essence of symposium.', icon: 'camera' },
-            { title: 'Treasure Hunt', cat: 'Non-Technical', desc: 'Thrilling hunt across campus.', icon: 'music' }
-        ];
+    <!-- Mouse Follow Spider -->
+    <div class="mouse-3d" id="mouse3D">
+        <div class="mouse-spider" id="mouseSpider">🕷️</div>
+    </div>
 
-        const grid = document.getElementById('events-grid');
-        events.forEach(e => {
-            grid.innerHTML += `
-        <div class="event-card glass-card">
-          <div class="event-icon"><i data-lucide="${e.icon}"></i></div>
-          <h3>${e.title}</h3>
-          <span class="category-tag">${e.cat}</span>
-          <p>${e.desc}</p>
-          <a href="register.html" class="btn btn-outline full-width">Register Now</a>
-        </div>
-      `;
-        });
-        lucide.createIcons();
-    </script>
+    <div class="relative flex min-h-screen flex-col overflow-x-hidden">
+        <header
+            class="flex items-center justify-between border-b border-primary/20 bg-background-dark/80 backdrop-blur-md px-6 md:px-20 py-4 sticky top-0 z-50">
+            <div class="flex items-center gap-8">
+                <a href="javascript:void(0)" onclick="pageTransition('index.html')"
+                    class="flex items-center gap-3 text-primary no-underline">
+                    <span class="material-symbols-outlined text-3xl">deployed_code</span>
+                    <h2 class="text-xl font-bold tracking-tight uppercase spider-title">Spider-Symposium</h2>
+                </a>
+                <nav class="hidden lg:flex items-center gap-8">
+                    <a class="text-slate-100/70 hover:text-primary transition-colors text-sm font-medium uppercase tracking-widest no-underline"
+                        href="javascript:void(0)" onclick="pageTransition('index.html')">Home</a>
+                    <a class="text-primary border-b-2 border-primary pb-1 text-sm font-medium uppercase tracking-widest no-underline"
+                        href="javascript:void(0)" onclick="pageTransition('events.html')">Missions</a>
+                    <a class="text-slate-100/70 hover:text-primary transition-colors text-sm font-medium uppercase tracking-widest no-underline"
+                        href="javascript:void(0)" onclick="pageTransition('about.html')">Intel</a>
+                    <a class="text-slate-100/70 hover:text-primary transition-colors text-sm font-medium uppercase tracking-widest no-underline"
+                        href="javascript:void(0)" onclick="pageTransition('contact.html')">Nexus</a>
+                </nav>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="relative hidden sm:block">
+                    <span
+                        class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-primary/60 text-xl">search</span>
+                    <input
+                        class="bg-primary/10 border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-1 focus:ring-primary w-64 placeholder:text-primary/40"
+                        placeholder="QUERY DATABASE..." type="text" />
+                </div>
+                <button class="p-2 rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition-all">
+                    <span class="material-symbols-outlined">notifications</span>
+                </button>
+                <a href="admin.html"
+                    class="size-10 rounded-full border-2 border-primary/50 overflow-hidden bg-primary/20">
+                    <img class="w-full h-full object-cover"
+                        src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=40&h=40" />
+                </a>
+            </div>
+        </header>
+        <main class="flex-1 max-w-7xl mx-auto w-full p-6 md:p-12">
+            <div class="mb-12 relative rounded-xl overflow-hidden border border-primary/30 group">
+                <div
+                    class="absolute inset-0 bg-gradient-to-r from-background-dark via-background-dark/60 to-transparent z-10">
+                </div>
+                <div class="absolute inset-0 hologram-overlay z-20 pointer-events-none"></div>
+                <img class="w-full h-[400px] object-cover opacity-50"
+                    src="https://images.unsplash.com/photo-1635805737707-575885ab0820?auto=format&fit=crop&q=80&w=1200" />
+                <div class="absolute inset-0 z-30 flex flex-col justify-center p-8 md:p-16">
+                    <div class="flex items-center gap-2 text-primary mb-4">
+                        <span class="material-symbols-outlined animate-pulse">terminal</span>
+                        <span class="text-xs font-bold tracking-[0.3em] uppercase web-swing-loader">MISSION BRIEFING:
+                            ACTIVE</span>
+                    </div>
+                    <h1
+                        class="text-4xl md:text-7xl font-bold text-white mb-6 tracking-tighter uppercase italic spider-title">
+                        Multiversal<br><span class="text-primary">Scouting</span></h1>
+                    <p class="text-slate-300 max-w-2xl text-lg font-light leading-relaxed mb-8">
+                        The primary directive of Symposium 2026. This workshop focuses on identifying and neutralizing
+                        dimensional anomalies within the Stark-Tech framework. Advanced spatial analysis and reality
+                        anchoring
+                        protocols are required for all participating agents.
+                    </p>
+                    <div class="flex items-center gap-6">
+                        <a href="javascript:void(0)"
+                            onclick="pageTransition('register.html?event=Multiversal%20Scouting')"
+                            class="mask-btn px-10">
+                            <span>INITIALIZE PROTOCOL</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mission Details Section (Rathinam Manner) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+                <div class="logistics-box">
+                    <span class="box-label">Deployment Date</span>
+                    <span class="box-value">March 15, 2026</span>
+                </div>
+                <div class="logistics-box">
+                    <span class="box-label">Time Window</span>
+                    <span class="box-value">09:00 AM - 06:00 PM</span>
+                </div>
+                <div class="logistics-box">
+                    <span class="box-label">Strategic Venue</span>
+                    <span class="box-value">Stark Tower, Queens, NYC</span>
+                </div>
+            </div>
+
+            <!-- Intelligence Officers Section -->
+            <div class="mb-16">
+                <h3 class="text-xl font-bold uppercase tracking-widest text-primary mb-6 flex items-center gap-3">
+                    <span class="material-symbols-outlined">badge</span> Intelligence Officers
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="coordinator-card">
+                        <div class="w-12 h-12 rounded-lg bg-primary/20 flex items-center justify-center text-primary">
+                            <span class="material-symbols-outlined">psychology</span>
+                        </div>
+                        <div>
+                            <p class="text-[10px] text-primary font-bold uppercase tracking-widest">Faculty Co-Ordinator
+                            </p>
+                            <p class="text-sm font-bold text-white">Stark Ext: 401</p>
+                        </div>
+                    </div>
+                    <div class="coordinator-card">
+                        <div class="w-12 h-12 rounded-lg bg-primary/20 flex items-center justify-center text-primary">
+                            <span class="material-symbols-outlined">engineering</span>
+                        </div>
+                        <div>
+                            <p class="text-[10px] text-primary font-bold uppercase tracking-widest">Student Co-Ordinator
+                            </p>
+                            <p class="text-sm font-bold text-white">Stark Ext: 402</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex border-b border-primary/20 mb-8 overflow-x-auto whitespace-nowrap">
+                <button
+                    class="px-8 py-4 border-b-2 border-primary text-primary font-bold tracking-widest text-sm flex items-center gap-2 uppercase">
+                    <span class="material-symbols-outlined text-lg">bolt</span> Mission Specializations
+                </button>
+                <button
+                    class="px-8 py-4 border-b-2 border-transparent text-slate-400 hover:text-white font-bold tracking-widest text-sm flex items-center gap-2 uppercase">
+                    <span class="material-symbols-outlined text-lg">memory</span> Tech Modules
+                </button>
+                <button
+                    class="px-8 py-4 border-b-2 border-transparent text-slate-400 hover:text-white font-bold tracking-widest text-sm flex items-center gap-2 uppercase">
+                    <span class="material-symbols-outlined text-lg">shield</span> Defense Drills
+                </button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div
+                    class="group relative bg-card-bg rounded-lg overflow-hidden web-card-pulse flex flex-col transition-all hover:-translate-y-1">
+                    <div class="relative h-48 overflow-hidden">
+                        <img class="w-full h-full object-cover grayscale transition-all group-hover:grayscale-0"
+                            src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=600&h=400" />
+                        <div class="absolute inset-0 bg-primary/10 mix-blend-overlay"></div>
+                        <div
+                            class="absolute top-4 left-4 bg-primary text-white text-[10px] font-bold px-2 py-1 uppercase tracking-tighter">
+                            Level: Omega</div>
+                        <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-card-bg to-transparent">
+                            <h3 class="text-xl font-bold text-white tracking-tight uppercase italic">Web-Net
+                                Cryptography</h3>
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <p class="text-sm text-slate-400 mb-6 line-clamp-2">Decrypt high-level security nodes using
+                            specialized spider-drone algorithms. Time-critical infiltration required.</p>
+                        <div class="grid grid-cols-2 gap-4 mb-6">
+                            <div class="bg-primary/5 p-3 rounded border border-primary/10">
+                                <p class="text-[10px] text-primary/60 uppercase font-bold mb-1">Squad Size</p>
+                                <div class="flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-primary text-sm">groups</span>
+                                    <span class="text-sm font-mono text-white">04 UNITS</span>
+                                </div>
+                            </div>
+                            <div class="bg-primary/5 p-3 rounded border border-primary/10">
+                                <p class="text-[10px] text-primary/60 uppercase font-bold mb-1">Duration</p>
+                                <div class="flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-primary text-sm">timer</span>
+                                    <span class="text-sm font-mono text-white">48 HOURS</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-auto">
+                            <a href="javascript:void(0)"
+                                onclick="pageTransition('register.html?event=Multiverse%20Scouting')"
+                                class="mask-btn w-full">
+                                <span>INITIALIZE MISSION</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="group relative bg-card-bg rounded-lg overflow-hidden neon-border-blue flex flex-col transition-all hover:-translate-y-1">
+                    <div class="relative h-48 overflow-hidden">
+                        <img class="w-full h-full object-cover grayscale transition-all group-hover:grayscale-0"
+                            src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&q=80&w=600&h=400" />
+                        <div class="absolute inset-0 bg-secondary/10 mix-blend-overlay"></div>
+                        <div
+                            class="absolute top-4 left-4 bg-secondary text-white text-[10px] font-bold px-2 py-1 uppercase tracking-tighter">
+                            Level: Gamma</div>
+                        <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-card-bg to-transparent">
+                            <h3 class="text-xl font-bold text-white tracking-tight uppercase italic">Nanotech
+                                Integration</h3>
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <p class="text-sm text-slate-400 mb-6 line-clamp-2">Advanced module for integrating Stark-grade
+                            nanotech into existing tactical gear. Focus on durability and rapid deployment.</p>
+                        <div class="grid grid-cols-2 gap-4 mb-6">
+                            <div class="bg-secondary/5 p-3 rounded border border-secondary/10">
+                                <p class="text-[10px] text-secondary/60 uppercase font-bold mb-1">Squad Size</p>
+                                <div class="flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-secondary text-sm">person</span>
+                                    <span class="text-sm font-mono text-white">01 UNIT</span>
+                                </div>
+                            </div>
+                            <div class="bg-secondary/5 p-3 rounded border border-secondary/10">
+                                <p class="text-[10px] text-secondary/60 uppercase font-bold mb-1">Duration</p>
+                                <div class="flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-secondary text-sm">timer</span>
+                                    <span class="text-sm font-mono text-white">12 HOURS</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-auto">
+                            <a href="javascript:void(0)"
+                                onclick="pageTransition('register.html?event=Nanotech%20Integration')"
+                                class="block w-full bg-secondary py-3 rounded text-white text-xs font-bold uppercase tracking-[0.2em] transition-all hover:shadow-[0_0_15px_rgba(37,99,235,0.5)] text-center no-underline">
+                                Sync Module
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="group relative bg-card-bg rounded-lg overflow-hidden neon-border-red flex flex-col transition-all hover:-translate-y-1">
+                    <div class="relative h-48 overflow-hidden">
+                        <img class="w-full h-full object-cover grayscale transition-all group-hover:grayscale-0"
+                            src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&q=80&w=600&h=400" />
+                        <div class="absolute inset-0 bg-primary/10 mix-blend-overlay"></div>
+                        <div
+                            class="absolute top-4 left-4 bg-primary text-white text-[10px] font-bold px-2 py-1 uppercase tracking-tighter">
+                            Level: Alpha</div>
+                        <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-card-bg to-transparent">
+                            <h3 class="text-xl font-bold text-white tracking-tight uppercase italic">Multiverse Scouting
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <p class="text-sm text-slate-400 mb-6 line-clamp-2">Identify and neutralize dimensional
+                            anomalies. High risk of reality distortion. Psychological resilience required.</p>
+                        <div class="grid grid-cols-2 gap-4 mb-6">
+                            <div class="bg-primary/5 p-3 rounded border border-primary/10">
+                                <p class="text-[10px] text-primary/60 uppercase font-bold mb-1">Squad Size</p>
+                                <div class="flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-primary text-sm">groups</span>
+                                    <span class="text-sm font-mono text-white">02 UNITS</span>
+                                </div>
+                            </div>
+                            <div class="bg-primary/5 p-3 rounded border border-primary/10">
+                                <p class="text-[10px] text-primary/60 uppercase font-bold mb-1">Duration</p>
+                                <div class="flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-primary text-sm">timer</span>
+                                    <span class="text-sm font-mono text-white">72 HOURS</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-auto">
+                            <a href="javascript:void(0)"
+                                onclick="pageTransition('register.html?event=Multiverse%20Scouting')"
+                                class="block w-full bg-primary py-3 rounded text-white text-xs font-bold uppercase tracking-[0.2em] transition-all hover:shadow-[0_0_15px_rgba(230,55,70,0.5)] text-center no-underline">
+                                Enter Gateway
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="group relative bg-card-bg rounded-lg border border-dashed border-primary/30 flex flex-col justify-center items-center p-8 transition-all hover:bg-primary/5">
+                    <span class="material-symbols-outlined text-6xl text-primary/30 mb-4">add_circle</span>
+                    <h3 class="text-xl font-bold text-white/40 tracking-tight uppercase italic mb-2">Request Custom
+                        Mission</h3>
+                    <p class="text-center text-sm text-slate-500 max-w-xs mb-6">Can't find a module that fits your
+                        skillset? Contact Stark Command for a personalized directive.</p>
+                    <a href="javascript:void(0)" onclick="pageTransition('contact.html')"
+                        class="px-6 py-2 border border-primary/40 text-primary text-[10px] font-bold uppercase tracking-widest hover:bg-primary/10 transition-colors no-underline">
+                        Open Comm Channel
+                    </a>
+                </div>
+            </div>
+        </main>
+        <footer class="bg-background-dark/90 border-t border-primary/20 py-12 px-6 md:px-20 mt-12">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+                <div class="flex items-center gap-3 text-primary/60 group">
+                    <span class="material-symbols-outlined text-2xl">deployed_code</span>
+                    <span class="text-lg font-bold tracking-tight uppercase">Spider-Symposium // 2026</span>
+                </div>
+                <div class="flex gap-8">
+                    <a class="text-slate-500 hover:text-primary transition-colors text-xs uppercase font-bold tracking-widest no-underline"
+                        href="javascript:void(0)" onclick="pageTransition('about.html')">Protocol</a>
+                    <a class="text-slate-500 hover:text-primary transition-colors text-xs uppercase font-bold tracking-widest no-underline"
+                        href="javascript:void(0)" onclick="pageTransition('contact.html')">Support</a>
+                    <a class="text-slate-500 hover:text-primary transition-colors text-xs uppercase font-bold tracking-widest no-underline"
+                        href="javascript:void(0)" onclick="pageTransition('admin.html')">Admin</a>
+                </div>
+                <div class="text-slate-500 text-[10px] font-mono tracking-tighter">
+                    ENCRYPTION: AES-256 | SIG: STARK_TECH_V2
+                </div>
+            </div>
+        </footer>
+        <script src="js/animations.js"></script>
 </body>
 
 </html>
