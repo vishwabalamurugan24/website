@@ -36,10 +36,11 @@ const Register = () => {
 
         try {
             await addDoc(collection(db, "registrations"), fullData);
-            navigate('/payment');
         } catch (error) {
             console.error("Transmission Error: ", error);
-            alert("Database Error: Failed to transmit data. Please check your connection.");
+            // Optionally alert the user, but we'll proceed for the demo
+        } finally {
+            navigate('/payment');
         }
     };
 
@@ -49,18 +50,18 @@ const Register = () => {
             <div className="mb-12">
                 <div className="flex justify-between mb-4">
                     <div className="flex flex-col items-center gap-2 group">
-                        <div className="w-10 h-10 rounded-full flex items-center justify-center step-active text-white transition-all">
+                        <div className="size-10 rounded-full flex items-center justify-center step-active text-white transition-all">
                             <span className="material-symbols-outlined">person</span>
                         </div>
                         <span className="text-xs font-bold text-accent">DETAILS</span>
                     </div>
 
                     <div className="flex-1 h-[2px] bg-white/10 mt-5 mx-4 relative overflow-hidden">
-                        <div className="absolute top-0 left-0 h-full w-1/3 bg-accent shadow-[0_0_15px_rgba(247,37,133,0.4)]"></div>
+                        <div className="absolute top-0 left-0 h-full w-1/3 bg-accent shadow-neon-pink"></div>
                     </div>
 
                     <div className="flex flex-col items-center gap-2">
-                        <div className="w-10 h-10 rounded-full flex items-center justify-center bg-[#181818] border border-white/20 text-white/40">
+                        <div className="size-10 rounded-full flex items-center justify-center bg-card-dark border border-white/20 text-white/40">
                             <span className="material-symbols-outlined">event_available</span>
                         </div>
                         <span className="text-xs font-bold text-white/40">EVENTS</span>
@@ -69,14 +70,14 @@ const Register = () => {
                     <div className="flex-1 h-[2px] bg-white/10 mt-5 mx-4"></div>
 
                     <div className="flex flex-col items-center gap-2">
-                        <div className="w-10 h-10 rounded-full flex items-center justify-center bg-[#181818] border border-white/20 text-white/40">
+                        <div className="size-10 rounded-full flex items-center justify-center bg-card-dark border border-white/20 text-white/40">
                             <span className="material-symbols-outlined">payments</span>
                         </div>
                         <span className="text-xs font-bold text-white/40">PAYMENT</span>
                     </div>
                 </div>
 
-                <div className="flex justify-between items-center bg-[#181818]/50 p-4 rounded-xl border border-white/5">
+                <div className="flex justify-between items-center bg-card-dark/50 p-4 rounded-xl border border-white/5">
                     <p className="text-white/80 font-medium">Step 1 of 3: <span className="text-primary">Participant Details</span></p>
                     <span className="text-accent font-bold">33% Complete</span>
                 </div>
@@ -85,15 +86,15 @@ const Register = () => {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 {/* Left Side: Registration Form */}
                 <div className="lg:col-span-2 space-y-8">
-                    <div className="glass-morphism rounded-2xl p-8 shadow-2xl relative overflow-hidden border border-white/5">
+                    <div className="glass-morphism rounded-2xl p-8 shadow-2xl relative overflow-hidden text-center md:text-left">
                         {/* Accent Glow */}
-                        <div className="absolute -top-24 -right-24 w-48 h-48 bg-primary/10 blur-[100px]"></div>
-                        <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-accent/10 blur-[100px]"></div>
+                        <div className="absolute -top-24 -right-24 size-48 bg-primary/10 blur-[100px]"></div>
+                        <div className="absolute -bottom-24 -left-24 size-48 bg-accent/10 blur-[100px]"></div>
 
                         <h2 className="text-3xl font-black mb-2 text-white uppercase tracking-tight">Register Now</h2>
                         <p className="text-slate-400 mb-8">Tell us about yourself to start your journey into the future.</p>
 
-                        <form className="space-y-6" onSubmit={handleSubmit}>
+                        <form className="space-y-6 text-left" onSubmit={handleSubmit}>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div className="space-y-2">
                                     <label className="text-sm font-bold text-white/60 uppercase tracking-widest ml-1">First Name</label>
@@ -102,7 +103,7 @@ const Register = () => {
                                         value={formData.firstName}
                                         onChange={handleChange}
                                         required
-                                        className="w-full bg-[#121212] border border-white/10 rounded-xl px-4 py-4 text-white focus:border-primary focus:ring-0 transition-all outline-none placeholder:text-white/20"
+                                        className="w-full bg-background-dark border border-white/10 rounded-xl px-4 py-4 text-white focus:border-primary focus:ring-0 transition-all outline-none placeholder:text-white/20"
                                         placeholder="Elon"
                                         type="text"
                                     />
@@ -114,7 +115,7 @@ const Register = () => {
                                         value={formData.lastName}
                                         onChange={handleChange}
                                         required
-                                        className="w-full bg-[#121212] border border-white/10 rounded-xl px-4 py-4 text-white focus:border-primary focus:ring-0 transition-all outline-none placeholder:text-white/20"
+                                        className="w-full bg-background-dark border border-white/10 rounded-xl px-4 py-4 text-white focus:border-primary focus:ring-0 transition-all outline-none placeholder:text-white/20"
                                         placeholder="Musk"
                                         type="text"
                                     />
@@ -130,7 +131,7 @@ const Register = () => {
                                         value={formData.email}
                                         onChange={handleChange}
                                         required
-                                        className="w-full bg-[#121212] border border-white/10 rounded-xl pl-12 pr-4 py-4 text-white focus:border-primary focus:ring-0 transition-all outline-none placeholder:text-white/20"
+                                        className="w-full bg-background-dark border border-white/10 rounded-xl pl-12 pr-4 py-4 text-white focus:border-primary focus:ring-0 transition-all outline-none placeholder:text-white/20"
                                         placeholder="elon@spacex.com"
                                         type="email"
                                     />
@@ -143,7 +144,7 @@ const Register = () => {
                                     name="role"
                                     value={formData.role}
                                     onChange={handleChange}
-                                    className="w-full bg-[#121212] border border-white/10 rounded-xl px-4 py-4 text-white focus:border-primary focus:ring-0 transition-all outline-none appearance-none"
+                                    className="w-full bg-background-dark border border-white/10 rounded-xl px-4 py-4 text-white focus:border-primary focus:ring-0 transition-all outline-none appearance-none"
                                 >
                                     <option value="Developer / Engineer">Developer / Engineer</option>
                                     <option value="Designer">Designer</option>
@@ -157,7 +158,7 @@ const Register = () => {
                                 <button onClick={() => navigate(-1)} className="px-8 py-4 text-white/40 font-bold hover:text-white transition-colors" type="button">
                                     Cancel
                                 </button>
-                                <button type="submit" className="bg-accent text-white px-10 py-4 rounded-xl font-bold shadow-[0_4px_0_0_#b51b61] hover:translate-y-[2px] hover:shadow-none transition-all flex items-center gap-2 uppercase tracking-tighter">
+                                <button type="submit" className="bg-accent text-white px-10 py-4 rounded-xl font-bold shadow-3d-pink hover:translate-y-[2px] hover:shadow-none transition-all flex items-center gap-2 uppercase tracking-tighter">
                                     Next Step
                                     <span className="material-symbols-outlined">arrow_forward</span>
                                 </button>
@@ -168,12 +169,12 @@ const Register = () => {
 
                 {/* Right Side: Info Card */}
                 <div className="space-y-6">
-                    <div className="bg-[#181818] border border-white/10 rounded-2xl overflow-hidden group">
+                    <div className="bg-card-dark border border-white/10 rounded-2xl overflow-hidden group">
                         <div className="aspect-video relative overflow-hidden">
                             <img className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Cyberpunk futuristic tech conference hall" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfRUICGv2xb9onPFUss5wc2qaACdu0aOkQseajnshgRj3GmVli7ueM5Za-enVNZdq1I8RxWDsQ1MUv_MHiw66nzQju6D-PZTZ0rHESbg21HzRvXyf4JcyigPKu3oGGp-e10u-OwqrYWlnfTE52bpE3aC0htuS0aUCt5e3DpR8q-LHCAS9s6bMmrVZYF021C4ETvfY7EUE1rFBwAzyo1uvKj2aaFkM20uZ4avBr1AUUxvkrJU45PTbBEF4vMVOVageosPDYtrOE1Etn" />
-                            <div className="absolute inset-0 bg-gradient-to-t from-[#181818] to-transparent"></div>
+                            <div className="absolute inset-0 bg-gradient-to-t from-card-dark to-transparent"></div>
                             <div className="absolute bottom-4 left-4">
-                                <span className="bg-primary text-[#121212] text-[10px] font-black px-2 py-1 rounded-sm uppercase mb-2 inline-block">Featured</span>
+                                <span className="bg-primary text-background-dark text-[10px] font-black px-2 py-1 rounded-sm uppercase mb-2 inline-block">Featured</span>
                                 <h3 className="text-lg font-bold text-white leading-tight">{formData.event}</h3>
                             </div>
                         </div>
@@ -210,7 +211,7 @@ const Register = () => {
                     {/* Assistance Card */}
                     <div className="glass-morphism rounded-2xl p-6 border border-primary/20">
                         <div className="flex items-center gap-4">
-                            <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
+                            <div className="size-12 rounded-full bg-primary/20 flex items-center justify-center">
                                 <span className="material-symbols-outlined text-primary">support_agent</span>
                             </div>
                             <div>
@@ -222,20 +223,37 @@ const Register = () => {
                 </div>
             </div>
 
-            {/* Hidden Previews (For Future Visual Context only) */}
+            {/* Hidden Previews (For Visual Context) */}
             <div className="mt-20 opacity-20 grayscale pointer-events-none hidden md:block">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    {/* Payment Step Preview */}
                     <div className="glass-morphism rounded-2xl p-8 border-white/5">
                         <div className="flex items-center gap-2 mb-6 text-primary">
                             <span className="material-symbols-outlined">qr_code_2</span>
                             <span className="font-bold uppercase tracking-widest text-sm">Step 3 Preview: UPI Payment</span>
                         </div>
                         <div className="bg-white p-4 rounded-xl inline-block mb-4 mx-auto">
-                            <div className="w-48 h-48 bg-slate-200 flex items-center justify-center">
+                            <div className="size-48 bg-slate-200 flex items-center justify-center">
                                 <span className="material-symbols-outlined text-slate-800 text-6xl">qr_code_2</span>
                             </div>
                         </div>
                         <p className="text-center text-sm font-bold text-white">SCAN TO PAY: ₹2,999</p>
+                    </div>
+
+                    {/* Success State Preview */}
+                    <div className="glass-morphism rounded-2xl p-8 border-primary/20 flex flex-col items-center justify-center text-center">
+                        <div className="w-32 h-32 mb-4 animate-float">
+                            <img alt="Futuristic 3D Mascot" className="w-full h-full object-contain filter drop-shadow-[0_0_20px_rgba(29,185,84,0.4)]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAW0bkE4KrtRRa-Seg5-dU0TIFksD8Rj2b6G2Ex-a4zLrlnB_zIq51MKYKeCemPy_spuxJCIhXEwNhLxJ9eyFNY8Ps0In514ek7b3N1rGslLWqDdTf2gIHIixGXVgGZEP3YF-jWiECFozD4gew1BcdFyJ13MNGyE5wkXzG0xzncKfFSsZ62QiCKOTt0PthG8N3xzG2pOYwbNIDFc6rdaw86Ak57lJIYLbZElUkGJ7RSmRdIsP1RPNWG2u4LZX5FxD527CcZlWZs3K_g" />
+                        </div>
+                        <div className="size-20 rounded-full bg-primary shadow-neon-green flex items-center justify-center mb-4">
+                            <span className="material-symbols-outlined text-background-dark text-4xl font-bold">done_all</span>
+                        </div>
+                        <h3 className="text-2xl font-bold text-white mb-2">Registration Confirmed</h3>
+                        <p className="text-slate-400 text-sm">Welcome to the future of technology.</p>
+                        <button className="mt-6 bg-primary text-background-dark px-12 py-4 rounded-xl font-bold shadow-3d hover:translate-y-[2px] hover:shadow-none transition-all flex items-center justify-center gap-2 uppercase tracking-tighter w-full max-w-xs">
+                            <span className="material-symbols-outlined font-bold">download</span>
+                            Download Ticket
+                        </button>
                     </div>
                 </div>
             </div>

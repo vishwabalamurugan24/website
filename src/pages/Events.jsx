@@ -76,7 +76,7 @@ const Events = () => {
             {/* Hero Section */}
             <div className="mb-16">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 mb-4">
-                    <span className="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
+                    <span className="size-2 rounded-full bg-accent animate-pulse"></span>
                     <span className="text-accent text-xs font-bold uppercase tracking-widest">Live Experience</span>
                 </div>
                 <h1 className="text-5xl md:text-7xl font-black text-white mb-6 tracking-tighter">
@@ -109,9 +109,9 @@ const Events = () => {
                     const isTech = event.category === 'Technical';
 
                     return (
-                        <div key={event.id} className="tilt-card glowing-border group bg-[#181818] rounded-xl overflow-hidden border border-white/5 flex flex-col reveal-card" style={{ animationDelay: event.delay }}>
+                        <div key={event.id} className="tilt-card glowing-border group bg-card-dark rounded-xl overflow-hidden border border-white/5 flex flex-col reveal-card" style={{ animationDelay: event.delay }}>
                             <div className="relative h-48 w-full overflow-hidden">
-                                <div className="absolute inset-0 bg-gradient-to-t from-[#181818] to-transparent z-10"></div>
+                                <div className="absolute inset-0 bg-gradient-to-t from-card-dark to-transparent z-10"></div>
                                 <img alt={event.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src={event.image} />
                                 <span className={`absolute top-4 left-4 z-20 backdrop-blur-md text-[10px] font-bold px-2 py-1 rounded uppercase tracking-widest ${isTech ? 'bg-primary/20 border border-primary text-primary' : 'bg-accent/20 border border-accent text-accent'
                                     }`}>
@@ -134,8 +134,8 @@ const Events = () => {
                                     <div className="flex items-center gap-2 text-white/40 text-xs">
                                         {event.id === 1 && (
                                             <div className="flex -space-x-2">
-                                                <div className="w-8 h-8 rounded-full border-2 border-card-dark bg-slate-700 flex items-center justify-center text-[10px] font-bold text-white">JD</div>
-                                                <div className="w-8 h-8 rounded-full border-2 border-card-dark bg-primary flex items-center justify-center text-[10px] font-bold text-black">+42</div>
+                                                <div className="size-8 rounded-full border-2 border-card-dark bg-slate-700 flex items-center justify-center text-[10px] font-bold text-white">JD</div>
+                                                <div className="size-8 rounded-full border-2 border-card-dark bg-primary flex items-center justify-center text-[10px] font-bold text-black">+42</div>
                                             </div>
                                         )}
                                         {event.location && (
@@ -169,29 +169,14 @@ const Events = () => {
                 })}
             </div>
 
-            {/* Newsletter Call to Action */}
-            <div className="mt-20 border-t border-white/10 bg-[#181818] py-16 rounded-[2.5rem] px-8 md:px-16 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+            <div className="mt-20 border-t border-white/10 bg-card-dark py-16 rounded-[2.5rem] px-8 md:px-16 shadow-[0_20px_50px_rgba(0,0,0,0.5)] mb-12">
                 <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                     <div className="reveal-card" style={{ animationDelay: '0.1s' }}>
                         <h2 className="text-3xl font-bold text-white mb-4">Don't miss the wave.</h2>
                         <p className="text-white/50 mb-8">Join our newsletter to receive the latest updates on schedule changes and exclusive workshop invites.</p>
                         <div className="flex flex-col sm:flex-row gap-2">
-                            <input className="bg-[#121212] border border-white/10 rounded-lg px-4 py-3 flex-1 text-white focus:border-primary outline-none transition-colors" placeholder="your@email.com" type="email" />
+                            <input className="bg-background-dark border border-white/10 rounded-lg px-4 py-3 flex-1 text-white focus:border-primary outline-none transition-colors" placeholder="your@email.com" type="email" />
                             <button className="bg-primary text-black font-bold px-6 py-3 rounded-lg transition-transform active:scale-95 whitespace-nowrap">SUBSCRIBE</button>
-                        </div>
-                    </div>
-                    <div className="flex justify-start md:justify-end gap-12 reveal-card" style={{ animationDelay: '0.2s' }}>
-                        <div className="flex flex-col gap-4">
-                            <span className="text-white font-bold uppercase text-xs tracking-widest">Socials</span>
-                            <a className="text-white/50 hover:text-primary transition-colors text-sm" href="#">Twitter</a>
-                            <a className="text-white/50 hover:text-primary transition-colors text-sm" href="#">Instagram</a>
-                            <a className="text-white/50 hover:text-primary transition-colors text-sm" href="#">LinkedIn</a>
-                        </div>
-                        <div className="flex flex-col gap-4">
-                            <span className="text-white font-bold uppercase text-xs tracking-widest">General</span>
-                            <a className="text-white/50 hover:text-primary transition-colors text-sm" href="#">FAQ</a>
-                            <a className="text-white/50 hover:text-primary transition-colors text-sm" href="#">Terms</a>
-                            <a className="text-white/50 hover:text-primary transition-colors text-sm" href="#">Privacy</a>
                         </div>
                     </div>
                 </div>
